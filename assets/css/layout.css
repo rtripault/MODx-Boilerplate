@@ -1,0 +1,535 @@
+/**************************
+00 - Styling back defaults (minimal.css ?)
+**************************/
+input:focus {
+    background:rgb(10,20,30);
+    background:rgba(10,20,30,.5);
+}
+html,
+body {
+    margin:0;
+    padding:0;
+}
+html {
+    background:[[*bgcolor]] url(assets/img/html-bg.jpg) repeat-x 0 0;
+    height:100%;
+}
+body {
+    background:url(assets/img/body-bg.png) repeat-y 0 0;
+    height:auto;
+    margin:0 auto;
+    min-height:100%;
+    overflow:auto;
+    /*padding:0 5px;*/
+    width:[[*bodyWidth]];
+}
+
+/**************************
+01 - HEADER
+**************************/
+[role=banner] {
+    background:url(assets/img/header-bg.jpg) no-repeat 0 0;
+    height:220px;
+    padding-top:30px;
+    /*width:[[*bodyWidth]];*/
+}
+    [role=banner] hgroup {
+        /*background:yellow;*/
+        float:left;
+        height:170px;
+        width:670px;
+        padding:0 5px 0 0;
+        position:relative;
+    }
+        #siteName {
+            margin-left:2px;
+            width:470px;
+            height:150px;
+        }
+        [role=banner] h2 {
+            position:absolute;
+            /*background:blue;*/
+
+            top:125px;
+            height:40px;
+            line-height:40px;
+            text-indent:220px;
+            width:670px;
+        }
+
+/**************************
+search (header)
+**************************/
+    #search {
+        /*background:url(assets/img/search-fieldset.jpg) no-repeat;*/
+        float:right;
+        margin:54px 15px 0 0;
+
+        height:90px;
+        width:280px;
+    }
+    .ie6 #search {
+        /*background:red;*/
+        /*top:0;*/
+        margin:54px 0 0;
+    }
+        #search span {
+            /*background:rgba(10,20,30,.5);*/
+            clear:both;
+            display:block;
+            float:left;
+            height:20px;
+            margin:15px 0 15px 20px;
+            width:50%;
+
+            font:16px "TertreExtraBoldItalic";
+            line-height:20px;
+            color:#b2b2b2;
+            letter-spacing:4px;
+            text-shadow:1px 1px 1px #000;
+        }
+        .ie6 #search span {margin:7px 0 7px 10px;}
+        #search input {
+            height:31px;
+            line-height:31px;
+            width:160px;
+            /*vertical-align:middle;*/
+            background:#4d4d4d;
+            float:left;
+            /*opacity:0.5;*/
+
+            border:0 none;
+            padding:0;
+            margin-left:25px;
+        }
+        .ie6 #search input {margin-left:12px;}
+        #search input:focus { outline:none; opacity:1; }
+        #search button {
+            width:80px;
+            height:31px;
+            /*line-height:31px;*/
+            padding:0;
+            margin:0;
+            /*vertical-align:middle;*/
+            background:#dadada url(assets/img/search-button.png) no-repeat;
+            border:0 none;
+            float:left;
+            text-indent:10px;
+            text-shadow:0 1px 0 #fff, -1px -1px 0 #808080;
+            font-weight:bold;
+            /*opacity:0.5;*/
+
+            font:22px/31px 'TertreExtraBold';
+            letter-spacing:3px;
+        }
+        /*#search > input:focus + button { opacity:1; }*/
+        #search button:hover { color:[[*link]]; }
+            /*#go {
+                background:red;
+                top:-5px;
+                margin:0;
+                padding:0;
+                position:absolute;
+            }*/
+
+/**************************
+02 - NAV
+**************************/
+nav {
+    background:[[*aside-color]];
+    float:left;
+    margin:0 5px;
+    width:960px;
+}
+.ie6 nav { margin:0 2px}
+    nav ul {
+        margin:1px 0;
+        height:50px;
+        
+        /*background:blue;*/
+        border-top:1px solid #989898;
+        border-bottom:1px solid #231f20;
+        height:46px;
+    }
+        nav li,
+        nav li a,
+        nav li a:visited { color:[[*link]]; }
+        nav li { display:inline; }
+        nav li a {
+            padding: 0 15px;
+            text-decoration:none;
+            text-shadow:1px 1px 0 #000;
+        }
+        nav li a:first-letter { text-transform:capitalize; }
+        nav li a.active { opacity:0.5; }
+        nav li a:hover {
+            /*background:#607890;*/
+            color:#4d4d4d;
+            text-decoration:none;
+            /*text-shadow: 1px 1px 1px #fff;*/
+        }
+        nav li a.active:hover { color:#ccc; }
+
+
+/**************************
+03 - CONTENT
+**************************/
+div.mc {
+    /*background:[[*bodycolor]];*/
+    float:left;
+    padding:0 0 0 25px;
+    /*width:630px;*/
+}
+#main {
+    float:left;
+    margin:60px 0 0;
+    width:[[*main-width]];
+}
+    /* page d'accueil (liste/preview des articles) */
+    #main > article {
+        border-top:2px solid #999;
+        margin-bottom:50px;
+        overflow-x:hidden;
+        overflow-y:auto;
+        padding-top:15px;
+    }
+    #main > article:last-of-type { margin:0; }
+
+/**************************
+**************************/
+/* contenu résumé article */
+        .articleName {
+            margin-bottom:10px;
+            padding-left:10px;
+        }
+[[getResources?
+    &parents=`[[++cat]]`
+    &cache=`1`
+    &tpl=`articleNameCSS`
+    &depth=`0`
+    &limit=`8`
+    &sortby=`menuindex`
+    &sortdir=`ASC`
+]]
+        .pubDatePreview {
+            border-bottom:1px dotted #999;
+            margin-bottom:10px;
+            padding-bottom:10px;
+        }
+        .pictPreview {
+            background:#303030;
+            border:1px solid #000;
+            height:250px;
+            margin-bottom:20px;
+            padding:4px;
+            width:590px;
+            -khtml-transition: background 1s ease;
+            -moz-transition: background 1s ease;
+            -o-transition: background 1s ease;
+            transition: background 1s ease;
+        }
+[[getResources?
+    &parents=`[[++cat]]`
+    &cache=`1`
+    &tpl=`pictPreviewCSS`
+    &depth=`0`
+    &limit=`8`
+    &sortby=`menuindex`
+    &sortdir=`ASC`
+]]
+        .pictPreview:hover {
+            background:transparent;
+            -khtml-transition: background 1s ease;
+            -moz-transition: background 1s ease;
+            -o-transition: background 1s ease;
+            transition: background 1s ease;
+        }
+        .articleSummary {
+            line-height:1.5em;
+        }
+        .readMore {
+            float:right;
+            margin-top:10px;
+            padding:5px 0;
+            /*background:rgba(10,20,30,.5);
+            height:50px;*/
+        }
+            .readMore > span:before {
+                content:"Lire la suite de ";
+                text-decoration:none;
+                line-height:26px;
+            }
+        .read {
+            float:right;
+            background:[[*link]];
+            background: -webkit-gradient(linear, left top, left bottom, from(#00abea), to(#0083b2));
+            background: -moz-linear-gradient(top,  #00abea,  #0083b2);
+            border-top:1px solid #007099;
+            border-right:1px solid #00bbff;
+            border-bottom:1px solid #00bbff;
+            border-left:1px solid #007099;
+            margin:0 5px 0 10px;
+            padding:3px 8px;
+            -moz-border-radius:5px;
+            border-radius:5px;
+            -moz-box-shadow:1px 1px 1px #333;
+            box-shadow:1px 1px 1px #333;
+            height:20px;
+            line-height:20px;
+            
+            color:#000;
+            font-weight:bold;
+            text-decoration:none;
+            text-transform:capitalize;
+            text-shadow:1px 1px 0 #00bbff,
+                        -1px -1px 0 #007099;
+        }
+        .read:hover {
+            -moz-box-shadow:1px 1px 0 #000;
+            box-shadow:1px 1px 0 #000;
+            
+            color:#fff;
+        }
+        .read:focus, .read:active {
+            -moz-box-shadow:0 0 0 transparent;
+            box-shadow:0 0 0 transparent;
+            color:#fff;
+        }
+
+/**************************
+**************************/
+    /* article full page */
+        /*.articleName*/
+        /* better filtering to do */
+[[getResources?
+    &parents=`0`
+    &cache=`1`
+    &tpl=`metaCategorieCSS`
+    &depth=`0`
+    &limit=`8`
+    &sortby=`menuindex`
+    &sortdir=`ASC`
+    &showHidden=`1`
+    &_tvFilters=`sectionColor==#%||sectionColor==@%`
+    &_includeContent=`1`
+    &_includeTvs=`1`
+    &_processTvs=`1`
+    /*&_where=`{"template:=":8}`*/
+]]
+
+/**************************
+**************************/
+    /* commentaires */
+    #comments {
+        clear:left;
+        border-top:4px solid green;
+        margin-top:15px;
+    width:[[*main-width]];
+    }
+    .comWrap {
+        border-top:4px dashed black;
+        margin-top:10px;
+    }
+    .commentaire {
+        margin-bottom:15px;
+        overflow:hidden;
+        padding:10px 0 0;
+        position:relative;
+    }
+    .commentaire:last-of-type { margin:0; }
+        .head-com {
+            background:rgba(30,40,50,.2);
+            border-bottom:1px dashed #333;
+            height:67px;
+            padding:5px;
+        }
+            .quip-avatar {
+                border:1px solid #666;
+                float:left;
+                height:55px;
+                padding:5px;
+                width:55px;
+            }
+            .head-com > h3,
+            .head-com > p {
+                float:left;
+                margin-left:15px;
+                width:450px;
+            }
+            .head-com > h3 {
+                font-size:16px;
+            }
+        .com {
+            clear:both;
+            margin-left:82px;
+            padding:10px 0;
+        }
+        .com-foot {
+            border-top:1px solid #333;
+            overflow:hidden;
+        }
+            .com-foot > p {
+                background:#333;
+                float:right;
+                padding:5px 5px 5px 15px;
+                width:80%;
+                opacity:0.5;
+                -khtml-transition: opacity .4s ease;
+                -moz-transition: opacity .4s ease;
+                -o-transition: opacity .4s ease;
+                transition: opacity .4s ease;
+                -khtml-border-radius:0 0 0 10px;
+                -moz-border-radius:0 0 0 10px;
+                -o-border-radius:0 0 0 10px;
+                boder-radius:0 0 0 10px;
+            }
+            .com-foot > p:hover {
+                opacity:1;
+                -khtml-transition: opacity .4s ease;
+                -moz-transition: opacity .4s ease;
+                -o-transition: opacity .4s ease;
+                transition: opacity .4s ease;
+            }
+
+/**************************
+**************************/
+        /* form ajout commentaire */
+        #addComment {
+            margin-top:25px;
+        }
+            .quip-fld {
+                margin-bottom:5px;
+            }
+                #addComment label {
+                    display:block;
+                    float:left;
+                    padding-right:2%;
+                    text-align:right;
+                    width:45%;
+                }
+                #addComment input[type="text"] {
+                    width:50%;
+                }
+                .allowedtags {
+                    float:left;
+                    margin-right:2%;
+                    width:45%;
+                }
+                #addComment textarea {
+                    margin-left:47%;
+                    width:50%;
+                }
+                #addComment button[type="submit"] {
+                    clear:both;
+                    float:right;
+                    margin:15px 3% 0 0;
+                }
+
+/**************************
+**************************/
+/* Footer pagination */
+footer.paginate {
+    text-align:center;
+    margin:50px 0 0;
+    
+    height:30px;
+}
+.pageList {
+    background:#000;
+    list-style:none;
+    margin:0;
+    padding:2px 10px;
+    height:26px;
+    -khtml-border-radius:10px;
+    -moz-border-radius:10px;
+    -o-border-radius:10px;
+    border-radius:10px;
+}
+/*.ie6 .pageList,
+.ie7 .pageList { margin-bottom:35px; background: white}*/
+    .pageList li {
+        display:inline;
+        float:left;
+        margin:0;
+        padding:0;
+    }
+        .pageList li a {
+            display:block;
+            padding:0 5px;
+            text-decoration:none;
+            line-height:26px;
+        }
+
+/**************************
+XX - ASIDE
+**************************/
+aside[role="complementary"] {
+    background:[[*aside-color]];
+    float:right;
+    margin:0 5px 0 0;
+    height:inherit;
+    width:[[*aside-width]];
+}
+/*.ie6 aside[role="complementary"] section { width:280px; }*/
+    #spacer {
+        background:#ccc url(assets/img/aside-top.png) no-repeat 50% bottom;
+        height:95px; /* 60px margin-top + 35px img */
+        width:280px;
+    }
+    aside[role="complementary"] > section {
+        border-bottom:4px solid #333;
+        margin-bottom:25px;
+        padding-bottom:10px;
+    }
+    aside[role="complementary"] > section:last-of-type {
+        margin-bottom:0;
+    }
+        aside[role="complementary"] > section > h3 {
+            margin:0 0 15px 10px;
+        }
+        aside[role="complementary"] ul { padding:0 0 0 15px; }
+            aside[role="complementary"] li {
+                list-style:none;
+                padding:0 0 5px;
+            }
+[[getResources?
+    &parents=`[[++cat]]`
+    &cache=`1`
+    &tpl=`listCSS`
+    &depth=`0`
+    &limit=`0`
+    &sortby=`menuindex`
+    &sortdir=`ASC`
+]]
+            aside[role="complementary"] li > a {
+                border-top:1px dashed #231f20;
+                color:[[*link]];
+                display:block;
+                height:20px;
+                padding:2px 0 2px 10px;
+                text-decoration:none;
+            }
+            aside[role="complementary"] li > a:hover {
+                background:#231f20;
+                color:#fff;
+                text-shadow:1px 1px 0 #000;
+            }
+            aside[role="complementary"] li > a:first-letter { text-transform:capitalize; }
+
+/**************************
+XX - FOOTER
+**************************/
+#footer {
+    background:[[*aside-color]];
+    clear:both;
+    margin:0 5px;
+    bottom:0;
+    height:250px;
+    width:960px;
+}
+#footer:before {
+    content: url(assets/img/footer-before.png);
+    height:35px;
+}
+.ie6 #footer,
+.ie7 #footer {margin:35px 5px 0;}
