@@ -1,38 +1,14 @@
-/*
-fonts.css from the YUI Library: developer.yahoo.com/yui/
-          Please refer to developer.yahoo.com/yui/fonts/ for font sizing percentages
+/* fonts.css from the YUI Library: developer.yahoo.com/yui/
+   Refer to developer.yahoo.com/yui/3/cssfonts/ for font sizing percentages
 
-There are three custom edits:
- * remove arial, helvetica from explicit font stack
- * make the line-height relative and unit-less
- * remove the pre, code styles
+  There are three custom edits:
+   * remove arial, helvetica from explicit font stack
+   * we normalize monospace styles ourselves
+   * table font-size is reset in the HTML5 reset above so there is no need to repeat
 */
-@font-face {
-	font-family: 'TertreExtraBold';
-	src: url('assets/fonts/tertre-xbol-webfont.eot');
-	src: local('☺'),url('assets/fonts/tertre-xbol-webfont.woff') format('woff'),
-	                url('assets/fonts/tertre-xbol-webfont.ttf') format('truetype'),
-	                url('assets/fonts/tertre-xbol-webfont.svg#webfontPRnVByCO') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
+body { font:14px/21px sans-serif; *font-size:small; } /* hack retained to preserve specificity */
 
-@font-face {
-	font-family: 'TertreExtraBoldItalic';
-	src: url('assets/fonts/tertre-xbol-ita-webfont.eot');
-	src: local('☺'),url('assets/fonts/tertre-xbol-ita-webfont.woff') format('woff'),
-	                url('assets/fonts/tertre-xbol-ita-webfont.ttf') format('truetype'),
-	                url('assets/fonts/tertre-xbol-ita-webfont.svg#webfontHNCIGNFs') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-body { font:13px sans-serif; *font-size:small; *font:x-small; line-height:1.22; }
-
-table { font-size:inherit; font:100%; }
-
-select, input, textarea { font:99% sans-serif; }
-
+select, input, textarea, button { font:99% sans-serif; }
 
 /* normalize monospace sizing 
  * en.wikipedia.org/wiki/MediaWiki_talk:Common.css/Archive_11#Teletype_style_fix_for_Chrome
@@ -40,24 +16,47 @@ select, input, textarea { font:99% sans-serif; }
 pre, code, kbd, samp { font-family: monospace, sans-serif; }
 
 
-/* general fonts */
-nav {
-    font:20px/46px 'TertreExtraBold';
-    color:#303030;
-    letter-spacing:2px;
-}
+/* Personnal stuff here */
 
-.articleName {
-    font:30px/32px 'TertreExtraBold';
-    color:#303030;
-    letter-spacing:4px;
-}
-
-.aside-h {
-    font:16px/20px 'TertreExtraBold';
-    color:#b2b2b2;
-    letter-spacing:4px;
-    text-shadow:1px 1px 1px #000;
-}
-.aside-h:first-letter,
-.articleName { text-transform:capitalize; }
+#main { line-height: 1.5em; }
+    #main h1, #main h2, #main h3, #main h4, #main h5, #main h6 {
+        /*background: rgba(10,20,30,.5);*/
+        border-bottom: 1px dashed #333;
+        width: 100%;
+        padding: .5em 5px;
+    }
+    #main h1:first-letter, #main h2:first-letter, #main h3:first-letter, #main h4:first-letter, #main h5:first-letter, #main h6:first-letter { text-transform: uppercase }
+    #main h1 { font-size: 22px; }
+    #main h2 { font-size: 18px; }
+    #main h3 { font-size: 16px; }
+    
+    #main p {margin: 1.5em 0;}
+    #main h1:first-of-type + p { text-indent: 0; }
+    #main h1 + p:first-letter {
+        font: 40px bold verdana;
+        text-transform: uppercase;
+        float: left;
+        margin: 6px 4px 0 40px;
+        text-shadow: 1px 1px 0 #fff;
+    }
+    
+    #main h1 + p, #main h2 + p, #main h3 + p, #main h4 + p, #main h5 + p, #main h6 + p {
+        text-indent: 20px;
+        /*text-transform: uppercase;*/
+    }
+    
+    
+    #main q { margin: 0 15px; border: 1px dashed blue; display: block; padding: 10px; }
+    #main q:before, #main q:after {
+        color: blue;
+        font: 1.5em italic verdana;
+    }
+    #main q:before { content: "« "; margin-left: 20px; }
+    #main q:after { content: " »" }
+    
+    #main code { background: green; }
+    #main cite { background: orange; }
+    
+    #main dl { background: pink; }
+    #main ul { background: grey; }
+    #main ol { background: yellow; }

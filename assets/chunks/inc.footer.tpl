@@ -1,6 +1,6 @@
     <footer id="footer">
         <!-- use a TV/system setting for first "online" date // check MetaX &copyfrom -->
-        <p>&copy; 2010[[If?
+        <p>© 2010[[If?
             &subject=`[[now:date=`%Y`]]`
             &operator=`>`
             &operand=`2010`

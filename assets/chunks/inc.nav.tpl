@@ -1,50 +1,5 @@
     <nav role="navigation">
-[[!WayFinder?
-    &_removeNewLines=`0`
-    &_where=``
-    &_hereId=``
-    &_templates=``
-    &_config=``
-    
-    &StartId=`0`
-    &level=`0`
-    &includeDocs=``
-    &excludeDocs=``
-    &ph=`0`
-    &debug=`0`
-    &ignoreHidden=`0`
-    &hideSubMenus=`0`
-    &useWeblinkUrl=`1`
-    &fullLink=`0`
-    &sortOrder=`ASC`
-    &sortBy=`menuindex`
-    &limit=`0`
-    &cssTpl=`0`
-    &jsTpl=`0`
-    &rowIdPrefix=`0`
-    &textOfLinks=`menutitle`
-    &titleOfLinks=`pagetitle`
-    &displayStart=`0`
-    &permissions=`list`
-    
-    &startItemTpl=``
-    &parentRowHereTpl=``
-    &parentRowTpl=``
-    &hereTpl=``
-    &innerRowTpl=``
-    &innerHereTpl=``
-    &activeParentRowTpl=``
-    &categoryFoldersTpl=``
-
-    &firstClass=``
-    &lastClass=`last``
-    &hereClass=`active`
-    &selfClass=``
-    &parentClass=`parent`
-    &rowClass=``
-    &levelClass=``
-    &outerClass=``
-    &innerClass=``
-    &webLinkClass=``
-]]
+        <ul>
+[[getResources@modxboilerplate?context=`[[*context_key]]`]]
+        </ul>
     </nav>
