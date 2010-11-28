@@ -3,6 +3,7 @@
 .infos {
     background: rgba(10,10,10,.5);
     border: 1px dashed #000;
+    color: #fff;
     padding: 5px;
     opacity: 0.5;
     position: fixed;
@@ -21,8 +22,9 @@
 /* grids */
 #grid {
     position: absolute;
-    display: none;
-    background: url(assets/debug-img/grid.png) repeat-y top center;
+    /*display: none;*/
+    background: url(/assets/debug-img/grid.png) repeat-y top center;
+    content: ".";
     top: 0;
     left: 0;
     bottom: 0;
@@ -32,8 +34,9 @@
 
 #grid-14-21 {
     position: absolute;
-    display: none;
-    background: url(assets/debug-img/grid-14_21.png) repeat;
+    /*display: none;*/
+    background: url(/assets/debug-img/grid-14_21.png) repeat;
+    content: ".";
     top: 0;
     left: 0;
     bottom: 0;

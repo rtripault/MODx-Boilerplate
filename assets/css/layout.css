@@ -38,17 +38,16 @@ nav[role="navigation"] {
 }
     nav[role="navigation"] ul {
         list-style: none;
-        height: 30px;
+        height: 21px;
+        background: rgba(0,255,0,0.5);
     }
         nav[role="navigation"] li {
             float: left;
             margin-left: 10px;
-            /*line-height: 30px;*/
         }
         nav[role="navigation"] li:first-of-type { margin: 0;}
             nav[role="navigation"] li a:first-letter { text-transform: uppercase; }
             nav[role="navigation"] li a {
-                line-height: 30px;
                 display: block;
                 padding: 0 10px;
             }
@@ -66,11 +65,14 @@ div.mc {
     float: left;
     min-height: 100%;
     /*width: [[*body-width:stripString=`px`:subtract=`[[*aside-width:stripString=`px`]]`]]px;*/ /* think about padding, margin & borders */
+    width: 960px;
 }
 #main {
-    /*background: rgba(0,255,0,.2);*/
+    background: rgba(0,255,0,.2);
     float: left;
-    width: [[*main-width]];
+    /*width: [[*main-width]];*/
+    margin-left: 10px;
+    width: 640px;
 }
 
 
@@ -81,7 +83,8 @@ XX - ASIDE
 aside[role="complementary"] {
     background: [[*aside-color]];
     float: right;
-    width: [[*aside-width]];
+    /*width: [[*aside-width]];*/
+    width: 290px;
 }
 
 /**************************

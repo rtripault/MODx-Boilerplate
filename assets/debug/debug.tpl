@@ -1,10 +1,11 @@
 
             <div class="infos">
                 <hr />
-                [[%mbp.debuginfos? &topic=`default` &namespace=`modx-boilerplate`]]<hr />
+                [[%mbp.debuginfos? &topic=`default` &namespace=`modxboilerplate`]]<hr />
                 <noscript>NO JS !! <br /></noscript>
                 [[%mbp.uparent]][[!UltimateParent]] | [[%mbp.parent]][[*parent]] | [[%mbp.id]][[*id]]<br />
                 [[%mbp.tpl]][[*template]]<br />
+                [[%mbp.ctx]][[*context_key]] | [[%mbp.lng]][[++cultureKey]]
                 <hr />
                 [[%mbp.grids]]<hr />
                 [[%mbp.vertical-grid]]<a href="javascript:;" onclick="ToggleGrid()">[[%mbp.toggle]]</a><br />
