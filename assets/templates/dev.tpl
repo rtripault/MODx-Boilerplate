@@ -17,8 +17,8 @@
 <!-- /content -->
 
 [[inc?file=`[[++assets_path]]chunks/inc.js.tpl`]]
-<!--[[!++admin.dev:is=`1`:then=`[[inc?file=`[[++assets_path]]debug/infos.tpl`]]`:else=``]]-->
-[[inc?file=`[[++assets_path]]debug/infos.tpl`]]
+<!--[[!++admin.dev:is=`1`:then=`[[inc?file=`[[++assets_path]]debug/debug.tpl`]]`:else=``]]-->
+[[inc?file=`[[++assets_path]]debug/debug.tpl`]]
 </body>
 </html>
 <!--[[!++admin.dev:is=`1`:then=`[[inc?file=`[[++assets_path]]chunks/inc.perf.tpl`]]`]]-->

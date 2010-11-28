@@ -15,9 +15,24 @@
 $_lang[''] = "";
 $_lang[''] = "";*/
 
+// name
 $_lang['mbp.modxboilerplate'] = "MODx Boilerplate";
 $_lang['mbp.modxboilerplate_desc'] = "Fastly deploy basics resources to easyly prototype in MODx Revolution";
 
+// debug strings
+$_lang['mbp.debuginfos'] = "Infos";
+$_lang['mbp.nojs'] = "Javascript disabled!";
+$_lang['mbp.uparent'] = "Ultimate parent : ";
+$_lang['mbp.parent'] = "Parent : ";
+$_lang['mbp.id'] = "ID : ";
+$_lang['mbp.tpl'] = "Template : ";
+$_lang['mbp.grids'] = "Grids";
+$_lang['mbp.vertical-grid'] = "Verticale : ";
+$_lang['mbp.horizontal-grid'] = "Horizontal : ";
+$_lang['mbp.both-grid'] = "Both : ";
+$_lang['mbp.toggle'] = "toggle";
+
+// settings
 $_lang['admin.tagLine'] = "";
 $_lang['setting_admin.tagLine'] = "Tagline";
 $_lang['setting_admin.tagLine_desc'] = "Set your website tagline";
