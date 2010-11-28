@@ -15,6 +15,8 @@
 $_lang[''] = "";
 $_lang[''] = "";*/
 
+$_lang['mbp.modxboilerplate'] = "MODx Boilerplate";
+$_lang['mbp.modxboilerplate_desc'] = "Fastly deploy basics resources to easyly prototype in MODx Revolution";
 
 $_lang['admin.tagLine'] = "";
 $_lang['setting_admin.tagLine'] = "Tagline";
