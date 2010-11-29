@@ -48,10 +48,118 @@ $settings['mbp.dev']->fromArray(array(
 $settings['mbp.selectivizr']= $modx->newObject('modSystemSetting');
 $settings['mbp.selectivizr']->fromArray(array(
     'key' => 'mbp.selectivizr',
-    'value' => '1',
+    'value' => '0',
     'xtype' => 'combo-boolean',
     'namespace' => 'modxboilerplate',
     'area' => 'Developement',
+),'',true,true);
+
+$settings['mbp.pngfix']= $modx->newObject('modSystemSetting');
+$settings['mbp.pngfix']->fromArray(array(
+    'key' => 'mbp.pngfix',
+    'value' => '0',
+    'xtype' => 'combo-boolean',
+    'namespace' => 'modxboilerplate',
+    'area' => 'Developement',
+),'',true,true);
+
+$settings['mbp.profiling']= $modx->newObject('modSystemSetting');
+$settings['mbp.profiling']->fromArray(array(
+    'key' => 'mbp.profiling',
+    'value' => '0',
+    'xtype' => 'combo-boolean',
+    'namespace' => 'modxboilerplate',
+    'area' => 'Developement',
+),'',true,true);
+
+$settings['mbp.css']= $modx->newObject('modSystemSetting');
+$settings['mbp.css']->fromArray(array(
+    'key' => 'mbp.css',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'modxboilerplate',
+    'area' => 'Developement',
+),'',true,true);
+
+$settings['mbp.css_handled']= $modx->newObject('modSystemSetting');
+$settings['mbp.css_handled']->fromArray(array(
+    'key' => 'mbp.css_handled',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'modxboilerplate',
+    'area' => 'Developement',
+),'',true,true);
+
+$settings['mbp.css_print']= $modx->newObject('modSystemSetting');
+$settings['mbp.css_print']->fromArray(array(
+    'key' => 'mbp.css_print',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'modxboilerplate',
+    'area' => 'Developement',
+),'',true,true);
+
+$settings['mbp.rss']= $modx->newObject('modSystemSetting');
+$settings['mbp.rss']->fromArray(array(
+    'key' => 'mbp.rss',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'modxboilerplate',
+    'area' => 'Developement',
+),'',true,true);
+
+$settings['mbp.piwik']= $modx->newObject('modSystemSetting');
+$settings['mbp.piwik']->fromArray(array(
+    'key' => 'mbp.piwik',
+    'value' => '0',
+    'xtype' => 'combo-boolean',
+    'namespace' => 'modxboilerplate',
+    'area' => 'Analytics',
+),'',true,true);
+
+$settings['mbp.piwik_url']= $modx->newObject('modSystemSetting');
+$settings['mbp.piwik_url']->fromArray(array(
+    'key' => 'mbp.piwik_url',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'modxboilerplate',
+    'area' => 'Analytics',
+),'',true,true);
+
+$settings['mbp.piwik_id']= $modx->newObject('modSystemSetting');
+$settings['mbp.piwik_id']->fromArray(array(
+    'key' => 'mbp.piwik_id',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'modxboilerplate',
+    'area' => 'Analytics',
+),'',true,true);
+
+$settings['mbp.woopra']= $modx->newObject('modSystemSetting');
+$settings['mbp.woopra']->fromArray(array(
+    'key' => 'mbp.woopra',
+    'value' => '0',
+    'xtype' => 'combo-boolean',
+    'namespace' => 'modxboilerplate',
+    'area' => 'Analytics',
+),'',true,true);
+
+$settings['mbp.google_analytics']= $modx->newObject('modSystemSetting');
+$settings['mbp.google_analytics']->fromArray(array(
+    'key' => 'mbp.google_analytics',
+    'value' => '0',
+    'xtype' => 'combo-boolean',
+    'namespace' => 'modxboilerplate',
+    'area' => 'Analytics',
+),'',true,true);
+
+$settings['mbp.google_analytics_ua']= $modx->newObject('modSystemSetting');
+$settings['mbp.google_analytics_ua']->fromArray(array(
+    'key' => 'mbp.google_analytics_ua',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'modxboilerplate',
+    'area' => 'Analytics',
 ),'',true,true);
 
 
