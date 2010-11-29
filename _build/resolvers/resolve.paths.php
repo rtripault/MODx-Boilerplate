@@ -29,7 +29,7 @@
  */
 function createSetting(&$modx,$key,$value) {
     $ct = $modx->getCount('modSystemSetting',array(
-        'key' => 'modextra.'.$key,
+        'key' => 'modxboilerplate.'.$key,
     ));
     if (empty($ct)) {
         $setting = $modx->newObject('modSystemSetting');

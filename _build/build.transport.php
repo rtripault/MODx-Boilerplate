@@ -49,7 +49,7 @@ $sources = array(
     'plugins' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/plugins/',
     'lexicon' => $root . 'core/components/'.PKG_NAME_LOWER.'/lexicon/',
     'docs' => $root.'core/components/'.PKG_NAME_LOWER.'/docs/',
-    'pages' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/pages/',
+    /*'pages' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/pages/',*/
     'source_assets' => $root.'assets/components/'.PKG_NAME_LOWER,
     'source_core' => $root.'core/components/'.PKG_NAME_LOWER,
 );
@@ -78,6 +78,7 @@ $category->set('id',1);
 $category->set('category',PKG_NAME);
 
 /* add snippets */
+/*
 $snippets = include $sources['data'].'transport.snippets.php';
 if (!is_array($snippets)) {
     $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in snippets.');
@@ -85,6 +86,7 @@ if (!is_array($snippets)) {
     $category->addMany($snippets);
     $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($snippets).' snippets.');
 }
+*/
 
 /* create category vehicle */
 $attr = array(

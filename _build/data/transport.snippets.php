@@ -26,19 +26,30 @@
  * @subpackage build
  */
 
-/*
+
 $snippets = array();
 
 $snippets[0]= $modx->newObject('modSnippet');
 $snippets[0]->fromArray(array(
     'id' => 0,
-    'name' => 'modExtra',
+    'name' => 'getImagelist',
     'description' => 'Displays Items.',
-    'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/snippet.modxboilerplate.php'),
+    'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/snippet.getImagelist.php'),
 ),'',true,true);
-$properties = include $sources['build'].'properties/properties.modxboilerplate.php';
+$properties = include $sources['build'].'properties/properties.getImagelist.php';
 $snippets[0]->setProperties($properties);
 unset($properties);
 
+$snippets[1]= $modx->newObject('modSnippet');
+$snippets[1]->fromArray(array(
+    'id' => 1,
+    'name' => 'Executioner',
+    'description' => 'Displays Items.',
+    'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/snippet.Executioner.php'),
+),'',true,true);
+$properties = include $sources['build'].'properties/properties.Executioner.php';
+$snippets[1]->setProperties($properties);
+unset($properties);
+
+
 return $snippets;
-*/
