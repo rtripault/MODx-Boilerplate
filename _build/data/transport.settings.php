@@ -14,7 +14,7 @@
  * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along with
- * modExtra; if not, write to the Free Software Foundation, Inc., 59 Temple
+ * modxboilerplate; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
  *
  * @package modxboilerplate
@@ -27,23 +27,31 @@
  */
 $settings = array();
 
-
-$settings['mbp.modxboilerplate']= $modx->newObject('modSystemSetting');
-$settings['mbp.modxboilerplate']->fromArray(array(
-    'key' => 'mbp.modxboilerplate',
-    'value' => 'MODx Boilerplate',
+$settings['mbp.tagline']= $modx->newObject('modSystemSetting');
+$settings['mbp.tagline']->fromArray(array(
+    'key' => 'mbp.tagline',
+    'value' => '',
     'xtype' => 'textfield',
     'namespace' => 'modxboilerplate',
     'area' => 'General',
 ),'',true,true);
 
-$settings['mbp.modxboilerplate_desc']= $modx->newObject('modSystemSetting');
-$settings['mbp.modxboilerplate_desc']->fromArray(array(
-    'key' => 'mbp.modxboilerplate_desc',
-    'value' => 'Fastly deploy basics resources to easyly prototype in MODx Revolution',
-    'xtype' => 'textfield',
+$settings['mbp.dev']= $modx->newObject('modSystemSetting');
+$settings['mbp.dev']->fromArray(array(
+    'key' => 'mbp.dev',
+    'value' => '1',
+    'xtype' => 'combo-boolean',
     'namespace' => 'modxboilerplate',
-    'area' => 'General',
+    'area' => 'Developement',
+),'',true,true);
+
+$settings['mbp.selectivizr']= $modx->newObject('modSystemSetting');
+$settings['mbp.selectivizr']->fromArray(array(
+    'key' => 'mbp.selectivizr',
+    'value' => '1',
+    'xtype' => 'combo-boolean',
+    'namespace' => 'modxboilerplate',
+    'area' => 'Developement',
 ),'',true,true);
 
 

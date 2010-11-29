@@ -1,15 +1,15 @@
 <?php
 /**
- * modExtra
+ * MODx Boilerplate
  *
- * Copyright 2010 by Shaun McCormick <shaun+modextra@modx.com>
+ * Copyright 2010 by Romain Tripault // Melting Media <romain@melting-media.com>
  *
- * modExtra is free software; you can redistribute it and/or modify it under the
+ * MODx Boilerplate is free software; you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
  * Foundation; either version 2 of the License, or (at your option) any later
  * version.
  *
- * modExtra is distributed in the hope that it will be useful, but WITHOUT ANY
+ * MODx Boilerplate is distributed in the hope that it will be useful, but WITHOUT ANY
  * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
  * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
@@ -17,12 +17,12 @@
  * modExtra; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
  *
- * @package modextra
+ * @package modxboilerplate
  */
 /**
  * Build Schema script
  *
- * @package modextra
+ * @package modxboilerplate
  * @subpackage build
  */
 $mtime = microtime();
@@ -32,7 +32,7 @@ $tstart = $mtime;
 set_time_limit(0);
 
 /* define package name */
-define('PKG_NAME','modExtra');
+define('PKG_NAME','MODxBoilerplate');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
 
 /* define sources */
