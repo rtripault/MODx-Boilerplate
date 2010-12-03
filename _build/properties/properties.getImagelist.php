@@ -29,29 +29,28 @@
 $properties = array(
     array(
         'name' => 'tpl',
-        'desc' => 'prop_modextra.tpl_desc',
+        'desc' => 'prop_mbp.tpl_desc',
         'type' => 'textfield',
         'options' => '',
         'value' => '@CODE:<li><img src="[[+imageURL]]"/><p>[[+imageAlt]]</p></li>',
-        'lexicon' => 'modextra:properties',
+        'lexicon' => 'modxboilerplate:snippets',
     ),
     array(
         'name' => 'tvname',
-        'desc' => 'prop_modextra.sortby_desc',
+        'desc' => 'prop_mbp.tvname_desc',
         'type' => 'textfield',
         'options' => '',
         'value' => 'multiitems',
-        'lexicon' => 'modextra:properties',
+        'lexicon' => 'modxboilerplate:snippets',
     ),
     array(
         'name' => 'docid',
-        'desc' => 'prop_modextra.sortdir_desc',
+        'desc' => 'prop_mbp.docid_desc',
         'type' => 'textfield',
         'options' => '',
         'value' => '',
-        'lexicon' => 'modextra:properties',
+        'lexicon' => 'modxboilerplate:snippets',
     ),
 );
 
 return $properties;
-*/

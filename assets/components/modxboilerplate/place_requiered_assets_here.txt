@@ -1,1 +1,0 @@
-Here comes assets requiered for the back-end (chunks, templates, JS libs…)

@@ -14,26 +14,27 @@
  * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along with
- * modExtra; if not, write to the Free Software Foundation, Inc., 59 Temple
+ * MODx Boilerplate; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
  *
  * @package modxboilerplate
  */
 /**
- * Define the MODX path constants necessary for installation
+ * Properties for the inc snippet.
  *
  * @package modxboilerplate
  * @subpackage build
  */
-define('MODX_BASE_PATH', '/path/to/modx/');
-define('MODX_CORE_PATH', MODX_BASE_PATH . 'core/');
-define('MODX_MANAGER_PATH', MODX_BASE_PATH . 'manager/');
-define('MODX_CONNECTORS_PATH', MODX_BASE_PATH . 'connectors/');
-define('MODX_ASSETS_PATH', MODX_BASE_PATH . 'assets/');
 
+$properties = array(
+    array(
+        'name' => 'file',
+        'desc' => 'prop_mbp.file_desc',
+        'type' => 'textfield',
+        'options' => '',
+        'value' => '',
+        'lexicon' => 'modxboilerplate:snippets',
+    ),
+);
 
-define('MODX_BASE_URL','/');
-define('MODX_CORE_URL', MODX_BASE_URL . 'core/');
-define('MODX_MANAGER_URL', MODX_BASE_URL . 'manager/');
-define('MODX_CONNECTORS_URL', MODX_BASE_URL . 'connectors/');
-define('MODX_ASSETS_URL', MODX_BASE_URL . 'assets/');
+return $properties;

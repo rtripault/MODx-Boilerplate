@@ -202,8 +202,8 @@ Options -Indexes
 
 
 # custom error pages
-ErrorDocument 403 /403
-ErrorDocument 404 /404
+ErrorDocument 403 /s/403
+ErrorDocument 404 /s/404
 
 
 
@@ -215,6 +215,14 @@ AddCharset utf-8 .html .css .js .xml .json .rss
 # We don't need to tell everyone we're apache.
 ServerSignature Off
 
+#///////////////#
+#     OVH       #
+#///////////////#
+# OVH is a french hoster which needs some tweaks to make MODx Revolution works properly
+# on shared hosting. Uncomment if needed
+# Note : don't forget to set umask to 022 (site umask 022)
+#SetEnv PHP_VER 5_TEST
+#SetEnv REGISTER_GLOBALS 0
 
 
 #///////////////#

@@ -46,10 +46,10 @@ $sources = array(
     'resolvers' => $root . '_build/resolvers/',
     'chunks' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/chunks/',
     'snippets' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/snippets/',
-    'plugins' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/plugins/',
+        /*'plugins' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/plugins/',*/ /// NOT NEEDED FOR NOW
     'lexicon' => $root . 'core/components/'.PKG_NAME_LOWER.'/lexicon/',
     'docs' => $root.'core/components/'.PKG_NAME_LOWER.'/docs/',
-    /*'pages' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/pages/',*/
+        /*'pages' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/pages/',*/ /// NOT NEEDED FOR NOW
     'source_assets' => $root.'assets/components/'.PKG_NAME_LOWER,
     'source_core' => $root.'core/components/'.PKG_NAME_LOWER,
 );
@@ -58,7 +58,7 @@ unset($root);
 /* override with your own defines here (see build.config.sample.php) */
 require_once $sources['build'] . '/build.config.php';
 require_once MODX_CORE_PATH . 'model/modx/modx.class.php';
-/*require_once $sources['build'] . '/includes/functions.php';*/
+/*require_once $sources['build'] . '/includes/functions.php';*/ /// NOT NEEDED FOR NOW
 
 $modx= new modX();
 $modx->initialize('mgr');
@@ -78,7 +78,6 @@ $category->set('id',1);
 $category->set('category',PKG_NAME);
 
 /* add snippets */
-/*
 $snippets = include $sources['data'].'transport.snippets.php';
 if (!is_array($snippets)) {
     $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in snippets.');
@@ -86,7 +85,7 @@ if (!is_array($snippets)) {
     $category->addMany($snippets);
     $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($snippets).' snippets.');
 }
-*/
+
 
 /* create category vehicle */
 $attr = array(
@@ -139,7 +138,55 @@ $vehicle->resolve('file',array(
 $builder->putVehicle($vehicle);
 
 /* load system settings */
+$modx->log(modX::LOG_LEVEL_INFO,'Packaging in System Settings...');
 $settings = include $sources['data'].'transport.settings.php';
+if (!is_array($settings)) $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in settings.');
+$attributes= array(
+    xPDOTransport::UNIQUE_KEY => 'key',
+    xPDOTransport::PRESERVE_KEYS => true,
+    xPDOTransport::UPDATE_OBJECT => false,
+);
+/*
+$i = 0;
+foreach ($settings as $setting) {
+    $vehicle = $builder->createVehicle($setting,$attributes);
+    if ($i == 0) {
+        $vehicle->validate('php',array(
+            'source' => $sources['validators'] . 'paths.validator.php',
+        ));
+        $vehicle->resolve('file',array(
+            'source' => $sources['source_core'],
+            'target' => "return MODX_CORE_PATH . 'components/';",
+        ));
+        $vehicle->resolve('file',array(
+            'source' => $sources['source_assets'],
+            'target' => "return MODX_ASSETS_PATH . 'components/';",
+        ));
+        $vehicle->resolve('file',array(
+            'source' => $sources['data']. 'output/googlemap.php',
+            'target' => "return MODX_CORE_PATH . 'model/modx/processors/element/tv/renders/web/output/';",
+        ));
+        $vehicle->resolve('file',array(
+            'source' => $sources['data'] . 'properties/googlemap.php',
+            'target' => "return MODX_CORE_PATH . 'model/modx/processors/element/tv/renders/mgr/properties/';",
+        ));
+        $vehicle->resolve('file',array(
+            'source' => $sources['data'].'properties/googlemap.tpl',
+            'target' => "return MODX_MANAGER_PATH . 'templates/default/element/tv/renders/properties/';",
+        ));
+        $vehicle->resolve('php',array(
+            'source' => $sources['resolvers'] . 'setupoptions.resolver.php',
+        ));
+    }
+    $builder->putVehicle($vehicle);
+    $i++;
+}
+*/ // for custom setup, check back later
+$modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($settings).' System Settings.');
+unset($settings,$setting,$attributes);
+
+
+/*
 if (!is_array($settings)) {
     $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in settings.');
 } else {
@@ -155,6 +202,18 @@ if (!is_array($settings)) {
     $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($settings).' System Settings.');
 }
 unset($settings,$setting,$attributes);
+*/
+
+/* create context here */
+/*
+$context = $object->xpdo->newObject('modContext');
+$context->set('key','en');
+$context->save();
+*/ // check later
+
+/* create default resources here */
+
+
 
 /* load menu */
 $menu = include $sources['data'].'transport.menu.php';
@@ -178,9 +237,11 @@ if (empty($menu)) {
     $vehicle->resolve('php',array(
         'source' => $sources['resolvers'] . 'resolve.tables.php',
     ));
+    /*
     $vehicle->resolve('php',array(
         'source' => $sources['resolvers'] . 'resolve.paths.php',
     ));
+    */
     $builder->putVehicle($vehicle);
     $modx->log(modX::LOG_LEVEL_INFO,'Packaged in menu.');
 }
@@ -190,9 +251,11 @@ unset($vehicle,$menu);
 $builder->setPackageAttributes(array(
     'license' => file_get_contents($sources['docs'] . 'license.txt'),
     'readme' => file_get_contents($sources['docs'] . 'readme.txt'),
-    //'setup-options' => array(
-        //'source' => $sources['build'].'setup.options.php',
-    //),
+/*
+    'setup-options' => array(
+        'source' => $sources['build'].'setup.options.php',
+    ),
+*/
 ));
 $modx->log(modX::LOG_LEVEL_INFO,'Added package attributes and setup options.');
 

@@ -165,32 +165,4 @@ $settings['mbp.google_analytics_ua']->fromArray(array(
     'area' => 'Analytics',
 ),'',true,true);
 
-
-// add system settings modifications here
-
-$setting = $modx->getObject('modSystemSetting',array('key' => 'automatic_alias'));
-$setting->set('value', '1');
-$setting->save();
-
-$setting = $modx->getObject('modSystemSetting',array('key' => 'friendly_alias_translit'));
-$setting->set('value', 'noaccents');
-$setting->save();
-
-$setting = $modx->getObject('modSystemSetting',array('key' => 'friendly_urls'));
-$setting->set('value', '1');
-$setting->save();
-
-$setting = $modx->getObject('modSystemSetting',array('key' => 'use_alias_path'));
-$setting->set('value', '1');
-$setting->save();
-
-/*
-// customize "romain" user to use en
-
-// create multi contexts if needed for multilingual
-
-// add basic infos to contexts != web && != mgr if any (base_url, site_start, site_url, 404, 403, mbp., empty cultureKey…)
-
-*/
-
 return $settings;

@@ -29,21 +29,20 @@
 $properties = array(
     array(
         'name' => 'tElement',
-        'desc' => 'Element name (snippet or chunk name)',
+        'desc' => 'prop_mbp.tElement_desc',
         'type' => 'textfield',
         'options' => '',
         'value' => '',
-        'lexicon' => 'modextra:properties',
+        'lexicon' => 'modxboilerplate:snippets',
     ),
     array(
         'name' => 'tElementClass',
-        'desc' => 'Element class (modChunk or modSnippet)',
+        'desc' => 'prop_mbp.tElementClass_desc',
         'type' => 'textfield',
         'options' => '',
         'value' => 'modSnippet',
-        'lexicon' => 'modextra:properties',
+        'lexicon' => 'modxboilerplate:snippets',
     ),
 );
 
 return $properties;
-*/

@@ -25,6 +25,10 @@
  * @package modxboilerplate
  * @subpackage build
  */
+
+
+/* NO CUSTOM DB FOR NOW, NOT NEEDED
+
 if ($object->xpdo) {
     switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         case xPDOTransport::ACTION_INSTALL:
@@ -42,3 +46,4 @@ if ($object->xpdo) {
     }
 }
 return true;
+*/
