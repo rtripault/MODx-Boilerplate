@@ -96,8 +96,8 @@ unset($properties);
 $snippets[5]= $modx->newObject('modSnippet');
 $snippets[5]->fromArray(array(
     'id' => 5,
-    'name' => 'Returns actual time in unix timestamp format',
-    'description' => 'Includes files from filesystem',
+    'name' => 'now',
+    'description' => 'Returns actual time in unix timestamp format',
     'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/snippet.now.php'),
 ),'',true,true);
 /*
