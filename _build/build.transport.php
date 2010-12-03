@@ -50,7 +50,7 @@ $sources = array(
     'lexicon' => $root . 'core/components/'.PKG_NAME_LOWER.'/lexicon/',
     'docs' => $root.'core/components/'.PKG_NAME_LOWER.'/docs/',
         /*'pages' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/pages/',*/ /// NOT NEEDED FOR NOW
-    'source_assets' => $root.'assets/components/'.PKG_NAME_LOWER,
+    /*'source_assets' => $root.'assets/components/'.PKG_NAME_LOWER,*/
     'source_core' => $root.'core/components/'.PKG_NAME_LOWER,
 );
 unset($root);
@@ -72,7 +72,7 @@ $builder->createPackage(PKG_NAME_LOWER,PKG_VERSION,PKG_RELEASE);
 $builder->registerNamespace(PKG_NAME_LOWER,false,true,'{core_path}components/'.PKG_NAME_LOWER.'/');
 $modx->log(modX::LOG_LEVEL_INFO,'Created Transport Package and Namespace.');
 
-/* create category */
+/* create category */ // OK
 $category= $modx->newObject('modCategory');
 $category->set('id',1);
 $category->set('category',PKG_NAME);
@@ -140,13 +140,14 @@ $builder->putVehicle($vehicle);
 /* load system settings */
 $modx->log(modX::LOG_LEVEL_INFO,'Packaging in System Settings...');
 $settings = include $sources['data'].'transport.settings.php';
+// for custom setup options, check later
+/*
 if (!is_array($settings)) $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in settings.');
 $attributes= array(
     xPDOTransport::UNIQUE_KEY => 'key',
     xPDOTransport::PRESERVE_KEYS => true,
     xPDOTransport::UPDATE_OBJECT => false,
 );
-/*
 $i = 0;
 foreach ($settings as $setting) {
     $vehicle = $builder->createVehicle($setting,$attributes);
@@ -181,12 +182,10 @@ foreach ($settings as $setting) {
     $builder->putVehicle($vehicle);
     $i++;
 }
-*/ // for custom setup, check back later
 $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($settings).' System Settings.');
 unset($settings,$setting,$attributes);
-
-
-/*
+*/
+// no custom setup
 if (!is_array($settings)) {
     $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in settings.');
 } else {
@@ -202,7 +201,6 @@ if (!is_array($settings)) {
     $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($settings).' System Settings.');
 }
 unset($settings,$setting,$attributes);
-*/
 
 /* create context here */
 /*

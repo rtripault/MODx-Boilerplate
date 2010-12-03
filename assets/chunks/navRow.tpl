@@ -1,1 +1,0 @@
-            <li><a href="[[~[[+id]]]]">[[+menutitle:empty=`[[+pagetitle]]`]]</a></li>​
