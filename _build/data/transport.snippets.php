@@ -26,6 +26,8 @@
  * @subpackage build
  */
 
+// included in _build/includes/
+/*
 function getSnippetContent($filename) {
     $o = file_get_contents($filename);
     $o = str_replace('<?php','',$o);
@@ -33,6 +35,7 @@ function getSnippetContent($filename) {
     $o = trim($o);
     return $o;
 }
+*/
 
 $snippets = array();
 

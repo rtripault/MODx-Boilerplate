@@ -27,7 +27,6 @@
  */
 
 // create system settings for modxboilerplate
-
 $settings = array();
 
 $settings['mbp.tagline']= $modx->newObject('modSystemSetting');

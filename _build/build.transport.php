@@ -34,7 +34,7 @@ set_time_limit(0);
 /* define package */
 define('PKG_NAME','MODxBoilerplate');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-define('PKG_VERSION','0.0.1');
+define('PKG_VERSION','0.0.2');
 define('PKG_RELEASE','alpha1');
 
 /* define sources */
@@ -46,10 +46,10 @@ $sources = array(
     'resolvers' => $root . '_build/resolvers/',
     'chunks' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/chunks/',
     'snippets' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/snippets/',
-        /*'plugins' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/plugins/',*/ /// NOT NEEDED FOR NOW
+        /*'plugins' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/plugins/',*/
     'lexicon' => $root . 'core/components/'.PKG_NAME_LOWER.'/lexicon/',
     'docs' => $root.'core/components/'.PKG_NAME_LOWER.'/docs/',
-        /*'pages' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/pages/',*/ /// NOT NEEDED FOR NOW
+        /*'pages' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/pages/',*/
     /*'source_assets' => $root.'assets/components/'.PKG_NAME_LOWER,*/
     'source_core' => $root.'core/components/'.PKG_NAME_LOWER,
 );
@@ -58,7 +58,7 @@ unset($root);
 /* override with your own defines here (see build.config.sample.php) */
 require_once $sources['build'] . '/build.config.php';
 require_once MODX_CORE_PATH . 'model/modx/modx.class.php';
-/*require_once $sources['build'] . '/includes/functions.php';*/ /// NOT NEEDED FOR NOW
+require_once $sources['build'] . '/includes/functions.php';
 
 $modx= new modX();
 $modx->initialize('mgr');
@@ -66,13 +66,14 @@ echo '<pre>'; /* used for nice formatting of log messages */
 $modx->setLogLevel(modX::LOG_LEVEL_INFO);
 $modx->setLogTarget('ECHO');
 
+/* load the package builder class */
 $modx->loadClass('transport.modPackageBuilder','',false, true);
 $builder = new modPackageBuilder($modx);
 $builder->createPackage(PKG_NAME_LOWER,PKG_VERSION,PKG_RELEASE);
 $builder->registerNamespace(PKG_NAME_LOWER,false,true,'{core_path}components/'.PKG_NAME_LOWER.'/');
 $modx->log(modX::LOG_LEVEL_INFO,'Created Transport Package and Namespace.');
 
-/* create category */ // OK
+/* create category */
 $category= $modx->newObject('modCategory');
 $category->set('id',1);
 $category->set('category',PKG_NAME);
@@ -137,10 +138,10 @@ $vehicle->resolve('file',array(
 ));
 $builder->putVehicle($vehicle);
 
-/* load system settings */
+/* load new system settings */
 $modx->log(modX::LOG_LEVEL_INFO,'Packaging in System Settings...');
 $settings = include $sources['data'].'transport.settings.php';
-// for custom setup options, check later
+
 /*
 if (!is_array($settings)) $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in settings.');
 $attributes= array(
@@ -185,7 +186,41 @@ foreach ($settings as $setting) {
 $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($settings).' System Settings.');
 unset($settings,$setting,$attributes);
 */
-// no custom setup
+
+/* modify system settings */
+/* set site_name */
+$setting = $modx->getObject('modSystemSetting',array('key' => 'site_name'));
+$setting->set('value', 'GAB85'); /* value should be tweakable with custom setup */
+$setting->save();
+
+/* add system settings modifications here */
+$setting = $modx->getObject('modSystemSetting',array('key' => 'automatic_alias'));
+$setting->set('value', '1');
+$setting->save();
+
+$setting = $modx->getObject('modSystemSetting',array('key' => 'friendly_alias_translit'));
+$setting->set('value', 'noaccents');
+$setting->save();
+
+$setting = $modx->getObject('modSystemSetting',array('key' => 'friendly_urls'));
+$setting->set('value', '1');
+$setting->save();
+
+$setting = $modx->getObject('modSystemSetting',array('key' => 'use_alias_path'));
+$setting->set('value', '1');
+$setting->save();
+
+/* remove .html suffix */
+$contenttype = $modx->getObject('modContentType',array('id' => '1'));
+$contenttype->set('file_extensions', '');
+$contenttype->save();
+
+/* update base template */
+$template = $modx->getObject('modTemplate',array('id' => '1'));
+$template->set('content', '[[!inc?file=`[[++assets_path]]templates/dev.tpl`]]');
+$template->save();
+
+
 if (!is_array($settings)) {
     $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in settings.');
 } else {
