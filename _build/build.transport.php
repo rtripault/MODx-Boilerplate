@@ -78,6 +78,155 @@ $category= $modx->newObject('modCategory');
 $category->set('id',1);
 $category->set('category',PKG_NAME);
 
+/* modify system settings */
+/* set site_name */
+$setting = $modx->getObject('modSystemSetting',array('key' => 'site_name'));
+$setting->set('value', 'GAB85'); /* value should be tweakable with custom setup */
+$setting->save();
+
+
+/* create context here */
+/*
+$context = $object->xpdo->newObject('modContext');
+$context->set('key','en');
+$context->save();
+*/ /* @TODO check later */
+
+
+/* add system settings modifications here */
+$setting = $modx->getObject('modSystemSetting',array('key' => 'automatic_alias'));
+$setting->set('value', '1');
+$setting->save();
+
+$setting = $modx->getObject('modSystemSetting',array('key' => 'friendly_alias_translit'));
+$setting->set('value', 'noaccents');
+$setting->save();
+
+$setting = $modx->getObject('modSystemSetting',array('key' => 'friendly_urls'));
+$setting->set('value', '1');
+$setting->save();
+
+$setting = $modx->getObject('modSystemSetting',array('key' => 'use_alias_path'));
+$setting->set('value', '1');
+$setting->save();
+
+/* remove .html suffix */
+$contenttype = $modx->getObject('modContentType',array('id' => '1'));
+$contenttype->set('file_extensions', '');
+$contenttype->save();
+
+/* update base template */
+$template = $modx->getObject('modTemplate',array('id' => '1'));
+$template->set('content', '[[!inc?file=`[[++assets_path]]templates/dev.tpl`]]');
+$template->save();
+
+/* @TODO add files to filesystem (.htacces, templates…)
+    or create a custom package with packman & include it in subpackage */
+
+
+/**************/
+
+
+/* load property sets */
+$propertySets = include_once $sources['data'].'propertysets/transport.propertysets.php';
+if (!is_array($propertySets)) $modx->log(modX::LOG_LEVEL_FATAL,'No property sets returned.');
+$attributes= array(
+    xPDOTransport::UNIQUE_KEY => 'name',
+    xPDOTransport::PRESERVE_KEYS => false,
+    xPDOTransport::UPDATE_OBJECT => true,
+);
+foreach ($propertySets as $propertySet) {
+    $vehicle = $builder->createVehicle($propertySet,$attributes);
+    $builder->putVehicle($vehicle);
+}
+$modx->log(modX::LOG_LEVEL_INFO,'Added in '.count($propertySets).' property sets.'); flush();
+unset($propertySets,$propertySet,$attributes);
+
+/* load user groups */
+$usergroups = include_once $sources['data'].'transport.usergroups.php';
+if (!is_array($usergroups)) $modx->log(modX::LOG_LEVEL_FATAL,'No User Groups returned.');
+$attributes= array(
+    xPDOTransport::UNIQUE_KEY => 'name',
+    xPDOTransport::PRESERVE_KEYS => false,
+    xPDOTransport::UPDATE_OBJECT => true,
+);
+foreach ($usergroups as $usergroup) {
+    $vehicle = $builder->createVehicle($usergroup,$attributes);
+    $builder->putVehicle($vehicle);
+}
+$modx->log(modX::LOG_LEVEL_INFO,'Added in '.count($usergroups).' User Groups.'); flush();
+unset($usergroups,$usergroup,$attributes);
+
+/* create category */
+$category= $modx->newObject('modCategory');
+$category->set('id',1);
+$category->set('category',PKG_NAME);
+
+/* add templates */
+$templates = include $sources['data'].'transport.templates.php';
+if (is_array($templates)) {
+    $category->addMany($templates,'Templates');
+} else { $modx->log(modX::LOG_LEVEL_FATAL,'Adding templates failed.'); }
+$modx->log(modX::LOG_LEVEL_INFO,'Added in '.count($templates).' templates.'); flush();
+unset($templates);
+
+/* add chunks */
+$chunks = include $sources['data'].'transport.chunks.php';
+if (is_array($chunks)) {
+    $category->addMany($chunks,'Chunks');
+} else { $modx->log(modX::LOG_LEVEL_FATAL,'Adding chunks failed.'); }
+$modx->log(modX::LOG_LEVEL_INFO,'Added in '.count($chunks).' chunks.'); flush();
+unset($chunks);
+
+/* add snippets */
+$snippets = include $sources['data'].'transport.snippets.php';
+if (is_array($snippets)) {
+    $category->addMany($snippets,'Snippets');
+} else { $modx->log(modX::LOG_LEVEL_FATAL,'Adding snippets failed.'); }
+$modx->log(modX::LOG_LEVEL_INFO,'Added in '.count($snippets).' snippets.'); flush();
+unset($snippets);
+
+/* add tvs */
+$tvs = include $sources['data'].'transport.tvs.php';
+if (is_array($tvs)) {
+    $category->addMany($tvs,'TemplateVars');
+} else { $modx->log(modX::LOG_LEVEL_FATAL,'Adding tvs failed.'); }
+$modx->log(modX::LOG_LEVEL_INFO,'Added in '.count($tvs).' tvs.'); flush();
+unset($tvs);
+
+/* add subpackages */
+$success = include $sources['data'].'transport.subpackages.php';
+if (!$success) { $modx->log(modX::LOG_LEVEL_FATAL,'Adding subpackages failed.'); }
+$modx->log(modX::LOG_LEVEL_INFO,'Added in subpackages.'); flush();
+unset($success);
+
+/* load resources */
+$resources = include_once $sources['data'].'transport.resources.php';
+if (!is_array($resources)) $modx->log(modX::LOG_LEVEL_FATAL,'No resources returned.');
+$attributes= array(
+    xPDOTransport::PRESERVE_KEYS => true,
+    xPDOTransport::UPDATE_OBJECT => true,
+    xPDOTransport::UNIQUE_KEY => 'id',
+    xPDOTransport::RELATED_OBJECTS => true,
+    xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
+        'ContentType' => array(
+            xPDOTransport::PRESERVE_KEYS => false,
+            xPDOTransport::UPDATE_OBJECT => true,
+            xPDOTransport::UNIQUE_KEY => 'name',
+        ),
+    ),
+);
+foreach ($resources as $resource) {
+    $vehicle = $builder->createVehicle($resource,$attributes);
+    $builder->putVehicle($vehicle);
+}
+$modx->log(modX::LOG_LEVEL_INFO,'Added in '.count($resources).' Resources.'); flush();
+unset($resources,$resource,$attributes);
+
+
+/*****************/
+
+
 /* add snippets */
 $snippets = include $sources['data'].'transport.snippets.php';
 if (!is_array($snippets)) {
@@ -142,84 +291,6 @@ $builder->putVehicle($vehicle);
 $modx->log(modX::LOG_LEVEL_INFO,'Packaging in System Settings...');
 $settings = include $sources['data'].'transport.settings.php';
 
-/*
-if (!is_array($settings)) $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in settings.');
-$attributes= array(
-    xPDOTransport::UNIQUE_KEY => 'key',
-    xPDOTransport::PRESERVE_KEYS => true,
-    xPDOTransport::UPDATE_OBJECT => false,
-);
-$i = 0;
-foreach ($settings as $setting) {
-    $vehicle = $builder->createVehicle($setting,$attributes);
-    if ($i == 0) {
-        $vehicle->validate('php',array(
-            'source' => $sources['validators'] . 'paths.validator.php',
-        ));
-        $vehicle->resolve('file',array(
-            'source' => $sources['source_core'],
-            'target' => "return MODX_CORE_PATH . 'components/';",
-        ));
-        $vehicle->resolve('file',array(
-            'source' => $sources['source_assets'],
-            'target' => "return MODX_ASSETS_PATH . 'components/';",
-        ));
-        $vehicle->resolve('file',array(
-            'source' => $sources['data']. 'output/googlemap.php',
-            'target' => "return MODX_CORE_PATH . 'model/modx/processors/element/tv/renders/web/output/';",
-        ));
-        $vehicle->resolve('file',array(
-            'source' => $sources['data'] . 'properties/googlemap.php',
-            'target' => "return MODX_CORE_PATH . 'model/modx/processors/element/tv/renders/mgr/properties/';",
-        ));
-        $vehicle->resolve('file',array(
-            'source' => $sources['data'].'properties/googlemap.tpl',
-            'target' => "return MODX_MANAGER_PATH . 'templates/default/element/tv/renders/properties/';",
-        ));
-        $vehicle->resolve('php',array(
-            'source' => $sources['resolvers'] . 'setupoptions.resolver.php',
-        ));
-    }
-    $builder->putVehicle($vehicle);
-    $i++;
-}
-$modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($settings).' System Settings.');
-unset($settings,$setting,$attributes);
-*/
-
-/* modify system settings */
-/* set site_name */
-$setting = $modx->getObject('modSystemSetting',array('key' => 'site_name'));
-$setting->set('value', 'GAB85'); /* value should be tweakable with custom setup */
-$setting->save();
-
-/* add system settings modifications here */
-$setting = $modx->getObject('modSystemSetting',array('key' => 'automatic_alias'));
-$setting->set('value', '1');
-$setting->save();
-
-$setting = $modx->getObject('modSystemSetting',array('key' => 'friendly_alias_translit'));
-$setting->set('value', 'noaccents');
-$setting->save();
-
-$setting = $modx->getObject('modSystemSetting',array('key' => 'friendly_urls'));
-$setting->set('value', '1');
-$setting->save();
-
-$setting = $modx->getObject('modSystemSetting',array('key' => 'use_alias_path'));
-$setting->set('value', '1');
-$setting->save();
-
-/* remove .html suffix */
-$contenttype = $modx->getObject('modContentType',array('id' => '1'));
-$contenttype->set('file_extensions', '');
-$contenttype->save();
-
-/* update base template */
-$template = $modx->getObject('modTemplate',array('id' => '1'));
-$template->set('content', '[[!inc?file=`[[++assets_path]]templates/dev.tpl`]]');
-$template->save();
-
 
 if (!is_array($settings)) {
     $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in settings.');
@@ -236,16 +307,6 @@ if (!is_array($settings)) {
     $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($settings).' System Settings.');
 }
 unset($settings,$setting,$attributes);
-
-/* create context here */
-/*
-$context = $object->xpdo->newObject('modContext');
-$context->set('key','en');
-$context->save();
-*/ // check later
-
-/* create default resources here */
-
 
 
 /* load menu */
