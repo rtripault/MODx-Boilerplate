@@ -44,13 +44,15 @@ $sources = array(
     'build' => $root . '_build/',
     'data' => $root . '_build/data/',
     'resolvers' => $root . '_build/resolvers/',
+    'subpackages' => $root . '_build/subpackages/',
+    'validators' => $root . '_build/validators/',
     'chunks' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/chunks/',
     'snippets' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/snippets/',
         /*'plugins' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/plugins/',*/
     'lexicon' => $root . 'core/components/'.PKG_NAME_LOWER.'/lexicon/',
     'docs' => $root.'core/components/'.PKG_NAME_LOWER.'/docs/',
         /*'pages' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/pages/',*/
-    /*'source_assets' => $root.'assets/components/'.PKG_NAME_LOWER,*/
+    'source_assets' => $root.'assets/components/'.PKG_NAME_LOWER,
     'source_core' => $root.'core/components/'.PKG_NAME_LOWER,
 );
 unset($root);
@@ -85,13 +87,12 @@ $setting->set('value', 'GAB85'); /* value should be tweakable with custom setup 
 $setting->save();
 
 
-/* create context here */
-/*
-$context = $object->xpdo->newObject('modContext');
+/* create context here *//* @TODO check later */
+$context = $modx->newObject('modContext');
 $context->set('key','en');
 $context->save();
-*/ /* @TODO check later */
 
+/* @TODO create & define (if possible) required system settings (base_url, site_name, http_host…) for contexts */
 
 /* add system settings modifications here */
 $setting = $modx->getObject('modSystemSetting',array('key' => 'automatic_alias'));
@@ -111,9 +112,9 @@ $setting->set('value', '1');
 $setting->save();
 
 /* remove .html suffix */
-$contenttype = $modx->getObject('modContentType',array('id' => '1'));
-$contenttype->set('file_extensions', '');
-$contenttype->save();
+$suffix = $modx->getObject('modContentType',array('id' => '1'));
+$suffix->set('file_extensions', '');
+$suffix->save();
 
 /* update base template */
 $template = $modx->getObject('modTemplate',array('id' => '1'));
@@ -128,7 +129,7 @@ $template->save();
 
 
 /* load property sets */
-$propertySets = include_once $sources['data'].'propertysets/transport.propertysets.php';
+$propertySets = include_once $sources['data'].'transport.propertysets.php';
 if (!is_array($propertySets)) $modx->log(modX::LOG_LEVEL_FATAL,'No property sets returned.');
 $attributes= array(
     xPDOTransport::UNIQUE_KEY => 'name',
@@ -228,6 +229,7 @@ unset($resources,$resource,$attributes);
 
 
 /* add snippets */
+/*
 $snippets = include $sources['data'].'transport.snippets.php';
 if (!is_array($snippets)) {
     $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in snippets.');
@@ -235,7 +237,7 @@ if (!is_array($snippets)) {
     $category->addMany($snippets);
     $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($snippets).' snippets.');
 }
-
+*/ // seems duplicate
 
 /* create category vehicle */
 $attr = array(
@@ -327,15 +329,15 @@ if (empty($menu)) {
             ),
         ),
     ));
+    /*
     $modx->log(modX::LOG_LEVEL_INFO,'Adding in PHP resolvers...');
     $vehicle->resolve('php',array(
         'source' => $sources['resolvers'] . 'resolve.tables.php',
     ));
-    /*
+    */
     $vehicle->resolve('php',array(
         'source' => $sources['resolvers'] . 'resolve.paths.php',
     ));
-    */
     $builder->putVehicle($vehicle);
     $modx->log(modX::LOG_LEVEL_INFO,'Packaged in menu.');
 }
@@ -345,6 +347,7 @@ unset($vehicle,$menu);
 $builder->setPackageAttributes(array(
     'license' => file_get_contents($sources['docs'] . 'license.txt'),
     'readme' => file_get_contents($sources['docs'] . 'readme.txt'),
+/* @TODO custom setup options */
 /*
     'setup-options' => array(
         'source' => $sources['build'].'setup.options.php',
