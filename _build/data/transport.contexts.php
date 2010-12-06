@@ -25,16 +25,21 @@
  * @package modxss
  */
 /**
- * Integrates google site search
- *
  * @package modxss
+ * @subpackage build
  */
-$url = $modx->getOption('url',$scriptProperties,'http://www.google.com/search');
+$contexts = array();
 
-if (!empty($_POST) && !empty($_POST['gsearch'])) {
-    $r = 'site:'.$modx->getOption('site_url').'+'.$_POST['gsearch'];
-    $rurl = $url.'?q='.$r;
-    $modx->sendRedirect($rurl);
-}
+$contexts[1]= $modx->newObject('modContext');
+$contexts[1]->fromArray(array(
+    'key' => 'en',
+    'description' => 'Context for english website',
+),'',true,true);
 
-return '';
+$contexts[2]= $modx->newObject('modContext');
+$contexts[2]->fromArray(array(
+    'key' => 'fr',
+    'description' => 'Context for french website',
+),'',true,true);
+
+return $contexts;

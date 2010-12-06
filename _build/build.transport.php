@@ -29,18 +29,9 @@
 /**
  * @TODO
  *
- * fix resource id (parent being 1, should be 11)
- * remove context creation & check on how to build one
- * rss template creation failed // what's wrong
  * subpackages should appear in the package grid
- * checkout errors ouput (seems to be assets/components/modxboilerplate missing)
- * remove test property set
- * remove getimagelist snippet (to be included with multi items tv package once build)
- * remove gettime snippet (seems not needed for the rss feeds)
- * template content not updated with package (but is after building, same behavior as context)
- * add packman package
- * check update
  * add MBP stuff (assets)
+ * fix provisioner package
  *
  **/
 
@@ -53,7 +44,7 @@ set_time_limit(0);
 /* define package */
 define('PKG_NAME','MODxBoilerplate');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-define('PKG_VERSION','0.0.3');
+define('PKG_VERSION','0.0.5');
 define('PKG_RELEASE','alpha1');
 
 /* define sources */
@@ -94,10 +85,6 @@ $builder->createPackage(PKG_NAME_LOWER,PKG_VERSION,PKG_RELEASE);
 $builder->registerNamespace(PKG_NAME_LOWER,false,true,'{core_path}components/'.PKG_NAME_LOWER.'/');
 $modx->log(modX::LOG_LEVEL_INFO,'Created Transport Package and Namespace.');
 
-/* create category */
-$category= $modx->newObject('modCategory');
-$category->set('id',1);
-$category->set('category',PKG_NAME);
 
 /* modify system settings */
 /* set site_name */
@@ -106,39 +93,25 @@ $setting->set('value', 'GAB85'); /* value should be tweakable with custom setup 
 $setting->save();
 
 
-/* create context here *//* @TODO check later */
-$context = $modx->newObject('modContext');
-$context->set('key','en');
-$context->save();
+/* create context here */
+/*
+$contexts = include_once $sources['data'].'transport.contexts.php';
+if (!is_array($contexts)) $modx->log(modX::LOG_LEVEL_FATAL,'No Context returned.');
+$attributes = array(
+    xPDOTransport::UNIQUE_KEY => 'key',
+    xPDOTransport::PRESERVE_KEYS => true,
+    xPDOTransport::UPDATE_OBJECT => false,
+);
+foreach ($contexts as $context) {
+    $vehicle = $builder->createVehicle($context,$attributes);
+    $builder->putVehicle($vehicle);
+}
+$modx->log(modX::LOG_LEVEL_INFO,'Added in '.count($contexts).' contexts.'); flush();
+unset($contexts,$context,$attributes);
+*/
 
 /* @TODO create & define (if possible) required system settings (base_url, site_name, http_host…) for contexts */
 
-/* add system settings modifications here */
-$setting = $modx->getObject('modSystemSetting',array('key' => 'automatic_alias'));
-$setting->set('value', '1');
-$setting->save();
-
-$setting = $modx->getObject('modSystemSetting',array('key' => 'friendly_alias_translit'));
-$setting->set('value', 'noaccents');
-$setting->save();
-
-$setting = $modx->getObject('modSystemSetting',array('key' => 'friendly_urls'));
-$setting->set('value', '1');
-$setting->save();
-
-$setting = $modx->getObject('modSystemSetting',array('key' => 'use_alias_path'));
-$setting->set('value', '1');
-$setting->save();
-
-/* remove .html suffix */
-$suffix = $modx->getObject('modContentType',array('id' => '1'));
-$suffix->set('file_extensions', '');
-$suffix->save();
-
-/* update base template */
-$template = $modx->getObject('modTemplate',array('id' => '1'));
-$template->set('content', '[[!inc?file=`[[++assets_path]]templates/dev.tpl`]]');
-$template->save();
 
 /* @TODO add files to filesystem (.htacces, templates…)
     or create a custom package with packman & include it in subpackage */
@@ -148,6 +121,7 @@ $template->save();
 
 
 /* load property sets */
+/*
 $propertySets = include_once $sources['data'].'transport.propertysets.php';
 if (!is_array($propertySets)) $modx->log(modX::LOG_LEVEL_FATAL,'No property sets returned.');
 $attributes= array(
@@ -161,6 +135,7 @@ foreach ($propertySets as $propertySet) {
 }
 $modx->log(modX::LOG_LEVEL_INFO,'Added in '.count($propertySets).' property sets.'); flush();
 unset($propertySets,$propertySet,$attributes);
+*/
 
 /* load user groups */
 $usergroups = include_once $sources['data'].'transport.usergroups.php';
@@ -178,7 +153,7 @@ $modx->log(modX::LOG_LEVEL_INFO,'Added in '.count($usergroups).' User Groups.');
 unset($usergroups,$usergroup,$attributes);
 
 /* create category */
-$category= $modx->newObject('modCategory');
+$category = $modx->newObject('modCategory');
 $category->set('id',1);
 $category->set('category',PKG_NAME);
 
@@ -217,8 +192,11 @@ unset($tvs);
 /* add subpackages */
 $success = include $sources['data'].'transport.subpackages.php';
 if (!$success) { $modx->log(modX::LOG_LEVEL_FATAL,'Adding subpackages failed.'); }
-$modx->log(modX::LOG_LEVEL_INFO,'Added in subpackages.'); flush();
+$modx->log(modX::LOG_LEVEL_INFO,'Added in '.count($subpackages).' subpackages.'); flush();
 unset($success);
+
+
+
 
 /* load resources */
 $resources = include_once $sources['data'].'transport.resources.php';
@@ -288,7 +266,7 @@ $attr = array(
             xPDOTransport::UPDATE_OBJECT => true,
             xPDOTransport::UNIQUE_KEY => 'name',
         ),
-        'Chunks' => array (
+        'Chunks' => array(
             xPDOTransport::PRESERVE_KEYS => false,
             xPDOTransport::UPDATE_OBJECT => true,
             xPDOTransport::UNIQUE_KEY => 'name',
@@ -298,10 +276,12 @@ $attr = array(
 $vehicle = $builder->createVehicle($category,$attr);
 
 $modx->log(modX::LOG_LEVEL_INFO,'Adding file resolvers to category...');
+/*
 $vehicle->resolve('file',array(
     'source' => $sources['source_assets'],
     'target' => "return MODX_ASSETS_PATH . 'components/';",
 ));
+*/
 $vehicle->resolve('file',array(
     'source' => $sources['source_core'],
     'target' => "return MODX_CORE_PATH . 'components/';",
@@ -311,7 +291,6 @@ $builder->putVehicle($vehicle);
 /* load new system settings */
 $modx->log(modX::LOG_LEVEL_INFO,'Packaging in System Settings...');
 $settings = include $sources['data'].'transport.settings.php';
-
 
 if (!is_array($settings)) {
     $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in settings.');
@@ -361,6 +340,11 @@ if (empty($menu)) {
     $modx->log(modX::LOG_LEVEL_INFO,'Packaged in menu.');
 }
 unset($vehicle,$menu);
+
+/* Lexicon */
+/*
+$builder->buildLexicon($sources['lexicon']);
+*/
 
 /* now pack in the license file, readme and setup options */
 $builder->setPackageAttributes(array(

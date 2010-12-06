@@ -145,6 +145,7 @@ $resources[5]->fromArray(array(
     'context_key' => 'web',
     'menuindex' => 4,
     'menutitle' => '',
+    'content_type' => 4,
     'contentType' => 'text/css',
 ),'',true,true);
 
@@ -200,7 +201,7 @@ $resources[8] = $modx->newObject('modResource');
 $resources[8]->fromArray(array(
     'id' => 8,
     'parent' => 11,
-    'template' => 1,
+    'template' => 2,
     'pagetitle' => 'rss',
     'longtitle' => '[[++site_name]] RSS Feeds',
     'description' => '',
@@ -217,6 +218,7 @@ $resources[8]->fromArray(array(
     'context_key' => 'web',
     'menuindex' => 5,
     'menutitle' => '',
+    'content_type' => 6,
     'contentType' => 'text/xml',
 ),'',true,true);
 
@@ -264,6 +266,7 @@ $resources[10]->fromArray(array(
     'context_key' => 'web',
     'menuindex' => 1,
     'menutitle' => '',
+    'content_type' => 2,
     'contentType' => 'text/xml',
 ),'',true,true);
 

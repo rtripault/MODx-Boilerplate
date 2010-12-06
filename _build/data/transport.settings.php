@@ -26,6 +26,33 @@
  * @subpackage build
  */
 
+// update system setting
+$setting = $modx->getObject('modSystemSetting',array('key' => 'automatic_alias'));
+$setting->set('value', '1');
+$setting->save();
+
+$setting = $modx->getObject('modSystemSetting',array('key' => 'friendly_alias_translit'));
+$setting->set('value', 'noaccents');
+$setting->save();
+
+$setting = $modx->getObject('modSystemSetting',array('key' => 'friendly_urls'));
+$setting->set('value', '1');
+$setting->save();
+
+$setting = $modx->getObject('modSystemSetting',array('key' => 'use_alias_path'));
+$setting->set('value', '1');
+$setting->save();
+
+// remove html suffix
+$suffix = $modx->getObject('modContentType',array('id' => '1'));
+$suffix->set('file_extensions', '');
+$suffix->save();
+
+// update default template
+$template = $modx->getObject('modTemplate',array('id' => '1'));
+$template->set('content', '[[!inc?file=`[[++assets_path]]templates/dev.tpl`]]');
+$template->save();
+
 // create system settings for modxboilerplate
 $settings = array();
 
