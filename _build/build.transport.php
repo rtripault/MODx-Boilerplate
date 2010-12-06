@@ -25,6 +25,25 @@
  * @package modxboilerplate 
  * @subpackage build
  */
+
+/**
+ * @TODO
+ *
+ * fix resource id (parent being 1, should be 11)
+ * remove context creation & check on how to build one
+ * rss template creation failed // what's wrong
+ * subpackages should appear in the package grid
+ * checkout errors ouput (seems to be assets/components/modxboilerplate missing)
+ * remove test property set
+ * remove getimagelist snippet (to be included with multi items tv package once build)
+ * remove gettime snippet (seems not needed for the rss feeds)
+ * template content not updated with package (but is after building, same behavior as context)
+ * add packman package
+ * check update
+ * add MBP stuff (assets)
+ *
+ **/
+
 $mtime = microtime();
 $mtime = explode(' ', $mtime);
 $mtime = $mtime[1] + $mtime[0];
@@ -34,7 +53,7 @@ set_time_limit(0);
 /* define package */
 define('PKG_NAME','MODxBoilerplate');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-define('PKG_VERSION','0.0.2');
+define('PKG_VERSION','0.0.3');
 define('PKG_RELEASE','alpha1');
 
 /* define sources */
