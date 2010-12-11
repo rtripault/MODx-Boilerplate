@@ -44,7 +44,7 @@ set_time_limit(0);
 /* define package */
 define('PKG_NAME','MODxBoilerplate');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-define('PKG_VERSION','0.1.5');
+define('PKG_VERSION','0.1.7');
 define('PKG_RELEASE','alpha1');
 
 /* define sources */
@@ -65,11 +65,11 @@ $sources = array(
     /*
     'pages' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/pages/',
     */
-    'source_assets' => $root.'assets/components/'.PKG_NAME_LOWER,
-    'source_root' => $root . '_build/root/.htaccess',
     /*
-    'source_as' => $root.'assets/',
+    'source_assets' => $root.'assets/components/'.PKG_NAME_LOWER,
         */
+    'source_root' => $root . '_build/root/.htaccess',
+    'source_as' => $root.'_build/assets/',
     'source_core' => $root.'core/components/'.PKG_NAME_LOWER,
 );
 unset($root);
@@ -299,8 +299,16 @@ $vehicle->resolve('file',array(
     'target' => "return MODX_ASSETS_PATH . 'components/';",
 ));
 */
+// adding .htaccess
 $vehicle->resolve('file',array(
     'source' => $sources['source_root'],
+    'target' => "return MODX_BASE_PATH;",
+));
+$builder->putVehicle($vehicle);
+
+// adding MBP stuff
+$vehicle->resolve('file',array(
+    'source' => $sources['source_as'],
     'target' => "return MODX_BASE_PATH;",
 ));
 $builder->putVehicle($vehicle);

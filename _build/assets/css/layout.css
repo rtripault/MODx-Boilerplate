@@ -1,0 +1,96 @@
+/**************************
+00 - Styling back defaults (minimal.css ?)
+**************************/
+input:focus {
+    background: rgb(10,20,30);
+    background: rgba(10,20,30,.5);
+}
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+html {
+    background: [[*bg-color]];
+    height: 100%;
+}
+body {
+    background: [[*body-color]];
+    height: auto;
+    margin: 0 auto;
+    /*min-height: 100%;*/
+    overflow: auto;
+    width: [[*body-width]];
+}
+
+/**************************
+01 - HEADER
+**************************/
+[role=banner] {
+    background: [[*aside-color]];
+    width: [[*body-width]];
+}
+/**************************
+02 - NAV
+**************************/
+nav[role="navigation"] {
+    background: [[*aside-color]];
+}
+    nav[role="navigation"] ul {
+        list-style: none;
+        height: 21px;
+        background: rgba(0,255,0,0.5);
+    }
+        nav[role="navigation"] li {
+            float: left;
+            margin-left: 10px;
+        }
+        nav[role="navigation"] li:first-of-type { margin: 0;}
+            nav[role="navigation"] li a:first-letter { text-transform: uppercase; }
+            nav[role="navigation"] li a {
+                display: block;
+                padding: 0 10px;
+            }
+            nav[role="navigation"] li a:hover {
+                background: transparent;
+            }
+
+
+/**************************
+03 - CONTENT
+**************************/
+div.mc {
+    background: [[*body-color]];
+    /*background: rgba(50,40,30,.5);*/
+    float: left;
+    min-height: 100%;
+    /*width: [[*body-width:stripString=`px`:subtract=`[[*aside-width:stripString=`px`]]`]]px;*/ /* think about padding, margin & borders */
+    width: 960px;
+}
+#main {
+    background: rgba(0,255,0,.2);
+    float: left;
+    /*width: [[*main-width]];*/
+    margin-left: 10px;
+    width: 640px;
+}
+
+
+
+/**************************
+XX - ASIDE
+**************************/
+aside[role="complementary"] {
+    background: [[*aside-color]];
+    float: right;
+    /*width: [[*aside-width]];*/
+    width: 290px;
+}
+
+/**************************
+XX - FOOTER
+**************************/
+#footer {
+    background: [[*aside-color]];
+    clear: both;
+}
