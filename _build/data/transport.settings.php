@@ -76,11 +76,6 @@ $settings['use_alias_path']->fromArray(array (
 ), '', true, true);
 
 /*
-// remove html suffix
-$suffix = $modx->getObject('modContentType',array('id' => '1'));
-$suffix->set('file_extensions', '');
-$suffix->save();
-
 // update default template
 $template = $modx->getObject('modTemplate',array('id' => '1'));
 $template->set('content', '[[!inc?file=`[[++assets_path]]templates/dev.tpl`]]');

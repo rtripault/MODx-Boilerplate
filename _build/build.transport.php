@@ -44,7 +44,7 @@ set_time_limit(0);
 /* define package */
 define('PKG_NAME','MODxBoilerplate');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-define('PKG_VERSION','0.1.1');
+define('PKG_VERSION','0.1.2');
 define('PKG_RELEASE','alpha1');
 
 /* define sources */
@@ -115,6 +115,20 @@ unset($contexts,$context,$attributes);
 
 /**************/
 
+/* modContentTypes */
+$contenttypes = include $sources['data'].'transport.content_types.php';
+$attributes = array (
+    xPDOTransport::PRESERVE_KEYS => true,
+    xPDOTransport::UPDATE_OBJECT => true,
+    xPDOTransport::UNIQUE_KEY => 'mime_type',
+);
+foreach ($contenttypes as $contenttype) {
+    $vehicle = $builder->createVehicle($contenttype,$attributes);
+    $builder->putVehicle($vehicle);
+}
+unset ($contenttypes, $contenttype, $attributes);
+
+$modx->log(xPDO::LOG_LEVEL_INFO,'Added in '.count($contenttypes).'Content Types.'); flush();
 
 /* load property sets */
 /*
