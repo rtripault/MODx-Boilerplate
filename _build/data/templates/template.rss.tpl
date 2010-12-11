@@ -15,7 +15,7 @@
    &includeTVs=`1`
    &includeContent=`1`
    &hideContainers=`1`
-   &tpl=`rssItem`
+   &tpl=`rss.item`
 ]]
 
     </channel>

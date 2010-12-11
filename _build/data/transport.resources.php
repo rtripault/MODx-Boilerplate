@@ -36,7 +36,7 @@ $resources[11] = $modx->newObject('modResource');
 $resources[11]->fromArray(array(
     'id' => 11,
     'parent' => 0,
-    'template' => 1,
+    'template' => 0,
     'pagetitle' => 's',
     'longtitle' => '',
     'description' => 'system files', /* check if lexicon is usable */
@@ -59,7 +59,7 @@ $resources[2] = $modx->newObject('modResource');
 $resources[2]->fromArray(array(
     'id' => 2,
     'parent' => 11,
-    'template' => 1,
+    'template' => 3,
     'pagetitle' => '403',
     'longtitle' => '',
     'description' => '',
@@ -82,7 +82,7 @@ $resources[3] = $modx->newObject('modResource');
 $resources[3]->fromArray(array(
     'id' => 3,
     'parent' => 11,
-    'template' => 1,
+    'template' => 3,
     'pagetitle' => '404',
     'longtitle' => '',
     'description' => '',
@@ -105,7 +105,7 @@ $resources[4] = $modx->newObject('modResource');
 $resources[4]->fromArray(array(
     'id' => 4,
     'parent' => 11,
-    'template' => 1,
+    'template' => 3,
     'pagetitle' => 'legal',
     'longtitle' => '[[++site_name]] - legal infos',
     'description' => '',
@@ -128,7 +128,7 @@ $resources[5] = $modx->newObject('modResource');
 $resources[5]->fromArray(array(
     'id' => 5,
     'parent' => 11,
-    'template' => 1,
+    'template' => 0,
     'pagetitle' => 'master.css',
     'longtitle' => '',
     'description' => '',
@@ -153,7 +153,7 @@ $resources[6] = $modx->newObject('modResource');
 $resources[6]->fromArray(array(
     'id' => 6,
     'parent' => 11,
-    'template' => 1,
+    'template' => 3,
     'pagetitle' => 'offline',
     'longtitle' => '[[++site_name]] is currently offline',
     'description' => '',
@@ -177,7 +177,7 @@ $resources[7] = $modx->newObject('modResource');
 $resources[7]->fromArray(array(
     'id' => 7,
     'parent' => 11,
-    'template' => 1,
+    'template' => 3,
     'pagetitle' => 'openning',
     'longtitle' => '[[++site_name]] is on the way',
     'description' => '',
@@ -226,7 +226,7 @@ $resources[9] = $modx->newObject('modResource');
 $resources[9]->fromArray(array(
     'id' => 9,
     'parent' => 11,
-    'template' => 1,
+    'template' => 3,
     'pagetitle' => 'sitemap (html)',
     'longtitle' => '[[++site_name]] sitemap',
     'description' => '',
@@ -249,7 +249,7 @@ $resources[10] = $modx->newObject('modResource');
 $resources[10]->fromArray(array(
     'id' => 10,
     'parent' => 11,
-    'template' => 1,
+    'template' => 0,
     'pagetitle' => 'sitemap',
     'longtitle' => '',
     'description' => '',

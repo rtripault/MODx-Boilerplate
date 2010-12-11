@@ -26,15 +26,6 @@
  * @subpackage build
  */
 
-/**
- * @TODO
- *
- * subpackages should appear in the package grid
- * add MBP stuff (assets)
- * fix provisioner package
- *
- **/
-
 $mtime = microtime();
 $mtime = explode(' ', $mtime);
 $mtime = $mtime[1] + $mtime[0];
@@ -44,7 +35,7 @@ set_time_limit(0);
 /* define package */
 define('PKG_NAME','MODxBoilerplate');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-define('PKG_VERSION','0.1.7');
+define('PKG_VERSION','0.2.0');
 define('PKG_RELEASE','alpha1');
 
 /* define sources */
@@ -93,7 +84,8 @@ $builder->registerNamespace(PKG_NAME_LOWER,false,true,'{core_path}components/'.P
 $modx->log(modX::LOG_LEVEL_INFO,'Created Transport Package and Namespace.');
 
 
-/* create context here */
+/*************************************/
+/* @TODO create contexts for multilingual */
 /*
 $contexts = include_once $sources['data'].'transport.contexts.php';
 if (!is_array($contexts)) $modx->log(modX::LOG_LEVEL_FATAL,'No Context returned.');
@@ -113,9 +105,6 @@ unset($contexts,$context,$attributes);
 /* @TODO create & define (if possible) required system settings (base_url, site_name, http_host…) for contexts */
 
 
-/* @TODO add files to filesystem (.htacces, templates…)
-    or create a custom package with packman & include it in subpackage */
-
 
 /**************/
 
@@ -133,7 +122,7 @@ foreach ($contenttypes as $contenttype) {
 $modx->log(xPDO::LOG_LEVEL_INFO,'Added in '.count($contenttypes).' Content Types.'); flush();
 unset ($contenttypes, $contenttype, $attributes);
 
-/* load property sets */
+/* @TODO load property sets */
 /*
 $propertySets = include_once $sources['data'].'transport.propertysets.php';
 if (!is_array($propertySets)) $modx->log(modX::LOG_LEVEL_FATAL,'No property sets returned.');
@@ -186,16 +175,6 @@ if (is_array($chunks)) {
 $modx->log(modX::LOG_LEVEL_INFO,'Added in '.count($chunks).' chunks.'); flush();
 unset($chunks);
 
-/* add snippets */
-/*
-$snippets = include $sources['data'].'transport.snippets.php';
-if (is_array($snippets)) {
-    $category->addMany($snippets,'Snippets');
-} else { $modx->log(modX::LOG_LEVEL_FATAL,'Adding snippets failed.'); }
-$modx->log(modX::LOG_LEVEL_INFO,'Added in '.count($snippets).' snippets.'); flush();
-unset($snippets);
-*/
-
 /* add tvs */
 $tvs = include $sources['data'].'transport.tvs.php';
 if (is_array($tvs)) {
@@ -212,8 +191,8 @@ unset($success);
 
 
 
-
-/* load resources */
+/*************************/
+/* load resources in db */
 $resources = include_once $sources['data'].'transport.resources.php';
 if (!is_array($resources)) $modx->log(modX::LOG_LEVEL_FATAL,'No resources returned.');
 $attributes= array(
@@ -237,20 +216,7 @@ $modx->log(modX::LOG_LEVEL_INFO,'Added in '.count($resources).' Resources.'); fl
 unset($resources,$resource,$attributes);
 
 
-/*****************/
-
-
-/* add snippets */
-/*
-$snippets = include $sources['data'].'transport.snippets.php';
-if (!is_array($snippets)) {
-    $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in snippets.');
-} else {
-    $category->addMany($snippets);
-    $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($snippets).' snippets.');
-}
-*/ // seems duplicate
-
+/****************************/
 /* create category vehicle */
 $attr = array(
     xPDOTransport::UNIQUE_KEY => 'category',
@@ -276,13 +242,6 @@ $attr = array(
                 ),
             ),
         ),
-        /*
-        'Snippets' => array(
-            xPDOTransport::PRESERVE_KEYS => false,
-            xPDOTransport::UPDATE_OBJECT => true,
-            xPDOTransport::UNIQUE_KEY => 'name',
-        ),
-            */
         'Chunks' => array(
             xPDOTransport::PRESERVE_KEYS => false,
             xPDOTransport::UPDATE_OBJECT => true,
@@ -293,12 +252,8 @@ $attr = array(
 $vehicle = $builder->createVehicle($category,$attr);
 
 $modx->log(modX::LOG_LEVEL_INFO,'Adding file resolvers to category...');
-/*
-$vehicle->resolve('file',array(
-    'source' => $sources['source_assets'],
-    'target' => "return MODX_ASSETS_PATH . 'components/';",
-));
-*/
+
+/* Let's add static files */
 // adding .htaccess
 $vehicle->resolve('file',array(
     'source' => $sources['source_root'],
@@ -313,6 +268,7 @@ $vehicle->resolve('file',array(
 ));
 $builder->putVehicle($vehicle);
 
+// adding core/components
 $vehicle->resolve('file',array(
     'source' => $sources['source_core'],
     'target' => "return MODX_CORE_PATH . 'components/';",
@@ -373,7 +329,7 @@ if (empty($menu)) {
     ));
     */
     $builder->putVehicle($vehicle);
-    $modx->log(modX::LOG_LEVEL_INFO,'Packaged in menu.');
+    $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($menu).' menus.');
 }
 unset($vehicle,$menu);
 
@@ -386,6 +342,7 @@ $builder->buildLexicon($sources['lexicon']);
 $builder->setPackageAttributes(array(
     'license' => file_get_contents($sources['docs'] . 'license.txt'),
     'readme' => file_get_contents($sources['docs'] . 'readme.txt'),
+
 /* @TODO custom setup options */
 /*
     'setup-options' => array(
