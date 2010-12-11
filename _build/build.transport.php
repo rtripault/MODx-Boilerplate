@@ -44,7 +44,7 @@ set_time_limit(0);
 /* define package */
 define('PKG_NAME','MODxBoilerplate');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-define('PKG_VERSION','0.1.2');
+define('PKG_VERSION','0.1.5');
 define('PKG_RELEASE','alpha1');
 
 /* define sources */
@@ -66,6 +66,10 @@ $sources = array(
     'pages' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/pages/',
     */
     'source_assets' => $root.'assets/components/'.PKG_NAME_LOWER,
+    'source_root' => $root . '_build/root/.htaccess',
+    /*
+    'source_as' => $root.'assets/',
+        */
     'source_core' => $root.'core/components/'.PKG_NAME_LOWER,
 );
 unset($root);
@@ -126,9 +130,8 @@ foreach ($contenttypes as $contenttype) {
     $vehicle = $builder->createVehicle($contenttype,$attributes);
     $builder->putVehicle($vehicle);
 }
+$modx->log(xPDO::LOG_LEVEL_INFO,'Added in '.count($contenttypes).' Content Types.'); flush();
 unset ($contenttypes, $contenttype, $attributes);
-
-$modx->log(xPDO::LOG_LEVEL_INFO,'Added in '.count($contenttypes).'Content Types.'); flush();
 
 /* load property sets */
 /*
@@ -296,6 +299,12 @@ $vehicle->resolve('file',array(
     'target' => "return MODX_ASSETS_PATH . 'components/';",
 ));
 */
+$vehicle->resolve('file',array(
+    'source' => $sources['source_root'],
+    'target' => "return MODX_BASE_PATH;",
+));
+$builder->putVehicle($vehicle);
+
 $vehicle->resolve('file',array(
     'source' => $sources['source_core'],
     'target' => "return MODX_CORE_PATH . 'components/';",

@@ -38,4 +38,12 @@ $templates[0]->fromArray(array(
     'content' => file_get_contents($sources['data'].'templates/template.rss.tpl'),
 ),'',true,true);
 
+$templates[1]= $modx->newObject('modTemplate');
+$templates[1]->fromArray(array(
+    'id' => 1,
+    'templatename' => 'BaseTemplate',
+    'description' => 'Template',
+    'content' => file_get_contents($sources['data'].'templates/template.tpl'),
+),'',true,true);
+
 return $templates;

@@ -29,7 +29,6 @@
 $settings = array();
 
 // update settings
-
 $settings['site_name']= $modx->newObject('modSystemSetting');
 $settings['site_name']->fromArray(array (
   'key' => 'site_name',
@@ -75,16 +74,8 @@ $settings['use_alias_path']->fromArray(array (
   'area' => 'furls',
 ), '', true, true);
 
-/*
-// update default template
-$template = $modx->getObject('modTemplate',array('id' => '1'));
-$template->set('content', '[[!inc?file=`[[++assets_path]]templates/dev.tpl`]]');
-$template->save();
-*/
-
 
 // create system settings for modxboilerplate
-
 $settings['mbp.tagline']= $modx->newObject('modSystemSetting');
 $settings['mbp.tagline']->fromArray(array(
     'key' => 'mbp.tagline',
