@@ -44,7 +44,7 @@ set_time_limit(0);
 /* define package */
 define('PKG_NAME','MODxBoilerplate');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-define('PKG_VERSION','0.0.5');
+define('PKG_VERSION','0.0.8');
 define('PKG_RELEASE','alpha1');
 
 /* define sources */
@@ -57,11 +57,14 @@ $sources = array(
     'subpackages' => $root . '_build/subpackages/',
     'validators' => $root . '_build/validators/',
     'chunks' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/chunks/',
+    /*
     'snippets' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/snippets/',
-        /*'plugins' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/plugins/',*/
+    */
     'lexicon' => $root . 'core/components/'.PKG_NAME_LOWER.'/lexicon/',
     'docs' => $root.'core/components/'.PKG_NAME_LOWER.'/docs/',
-        /*'pages' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/pages/',*/
+    /*
+    'pages' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/pages/',
+    */
     'source_assets' => $root.'assets/components/'.PKG_NAME_LOWER,
     'source_core' => $root.'core/components/'.PKG_NAME_LOWER,
 );
@@ -88,9 +91,12 @@ $modx->log(modX::LOG_LEVEL_INFO,'Created Transport Package and Namespace.');
 
 /* modify system settings */
 /* set site_name */
+/*
 $setting = $modx->getObject('modSystemSetting',array('key' => 'site_name'));
-$setting->set('value', 'GAB85'); /* value should be tweakable with custom setup */
+$setting->set('value', 'GAB85'); */ /* value should be tweakable with custom setup */
+/*
 $setting->save();
+*/
 
 
 /* create context here */
@@ -174,12 +180,14 @@ $modx->log(modX::LOG_LEVEL_INFO,'Added in '.count($chunks).' chunks.'); flush();
 unset($chunks);
 
 /* add snippets */
+/*
 $snippets = include $sources['data'].'transport.snippets.php';
 if (is_array($snippets)) {
     $category->addMany($snippets,'Snippets');
 } else { $modx->log(modX::LOG_LEVEL_FATAL,'Adding snippets failed.'); }
 $modx->log(modX::LOG_LEVEL_INFO,'Added in '.count($snippets).' snippets.'); flush();
 unset($snippets);
+*/
 
 /* add tvs */
 $tvs = include $sources['data'].'transport.tvs.php';
@@ -261,11 +269,13 @@ $attr = array(
                 ),
             ),
         ),
+        /*
         'Snippets' => array(
             xPDOTransport::PRESERVE_KEYS => false,
             xPDOTransport::UPDATE_OBJECT => true,
             xPDOTransport::UNIQUE_KEY => 'name',
         ),
+            */
         'Chunks' => array(
             xPDOTransport::PRESERVE_KEYS => false,
             xPDOTransport::UPDATE_OBJECT => true,
@@ -336,6 +346,11 @@ if (empty($menu)) {
     $vehicle->resolve('php',array(
         'source' => $sources['resolvers'] . 'resolve.paths.php',
     ));
+    /*
+    $vehicle->resolve('php',array(
+        'source' => $sources['resolvers'] . 'resolve.subpackage.php',
+    ));
+    */
     $builder->putVehicle($vehicle);
     $modx->log(modX::LOG_LEVEL_INFO,'Packaged in menu.');
 }

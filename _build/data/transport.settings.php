@@ -104,7 +104,7 @@ $settings['mbp.profiling']->fromArray(array(
 $settings['mbp.css']= $modx->newObject('modSystemSetting');
 $settings['mbp.css']->fromArray(array(
     'key' => 'mbp.css',
-    'value' => '',
+    'value' => '5',
     'xtype' => 'textfield',
     'namespace' => 'modxboilerplate',
     'area' => 'Developement',
@@ -131,7 +131,7 @@ $settings['mbp.css_print']->fromArray(array(
 $settings['mbp.rss']= $modx->newObject('modSystemSetting');
 $settings['mbp.rss']->fromArray(array(
     'key' => 'mbp.rss',
-    'value' => '',
+    'value' => '8',
     'xtype' => 'textfield',
     'namespace' => 'modxboilerplate',
     'area' => 'Developement',
