@@ -26,23 +26,56 @@
  * @subpackage build
  */
 
-// update system setting
-$setting = $modx->getObject('modSystemSetting',array('key' => 'automatic_alias'));
-$setting->set('value', '1');
-$setting->save();
+$settings = array();
 
-$setting = $modx->getObject('modSystemSetting',array('key' => 'friendly_alias_translit'));
-$setting->set('value', 'noaccents');
-$setting->save();
+// update settings
 
-$setting = $modx->getObject('modSystemSetting',array('key' => 'friendly_urls'));
-$setting->set('value', '1');
-$setting->save();
+$settings['site_name']= $modx->newObject('modSystemSetting');
+$settings['site_name']->fromArray(array (
+  'key' => 'site_name',
+  'value' => 'GAB 85',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'site',
+), '', true, true);
 
-$setting = $modx->getObject('modSystemSetting',array('key' => 'use_alias_path'));
-$setting->set('value', '1');
-$setting->save();
+$settings['automatic_alias']= $modx->newObject('modSystemSetting');
+$settings['automatic_alias']->fromArray(array (
+  'key' => 'automatic_alias',
+  'value' => '1',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'furls',
+), '', true, true);
 
+$settings['friendly_alias_translit']= $modx->newObject('modSystemSetting');
+$settings['friendly_alias_translit']->fromArray(array (
+  'key' => 'friendly_alias_translit',
+  'value' => 'noaccents',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'furls',
+), '', true, true);
+
+$settings['friendly_urls']= $modx->newObject('modSystemSetting');
+$settings['friendly_urls']->fromArray(array (
+  'key' => 'friendly_urls',
+  'value' => '1',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'furls',
+), '', true, true);
+
+$settings['use_alias_path']= $modx->newObject('modSystemSetting');
+$settings['use_alias_path']->fromArray(array (
+  'key' => 'use_alias_path',
+  'value' => '1',
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'furls',
+), '', true, true);
+
+/*
 // remove html suffix
 $suffix = $modx->getObject('modContentType',array('id' => '1'));
 $suffix->set('file_extensions', '');
@@ -52,9 +85,10 @@ $suffix->save();
 $template = $modx->getObject('modTemplate',array('id' => '1'));
 $template->set('content', '[[!inc?file=`[[++assets_path]]templates/dev.tpl`]]');
 $template->save();
+*/
+
 
 // create system settings for modxboilerplate
-$settings = array();
 
 $settings['mbp.tagline']= $modx->newObject('modSystemSetting');
 $settings['mbp.tagline']->fromArray(array(

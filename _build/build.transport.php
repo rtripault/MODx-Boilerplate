@@ -44,7 +44,7 @@ set_time_limit(0);
 /* define package */
 define('PKG_NAME','MODxBoilerplate');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-define('PKG_VERSION','0.0.8');
+define('PKG_VERSION','0.1.1');
 define('PKG_RELEASE','alpha1');
 
 /* define sources */
@@ -87,16 +87,6 @@ $builder = new modPackageBuilder($modx);
 $builder->createPackage(PKG_NAME_LOWER,PKG_VERSION,PKG_RELEASE);
 $builder->registerNamespace(PKG_NAME_LOWER,false,true,'{core_path}components/'.PKG_NAME_LOWER.'/');
 $modx->log(modX::LOG_LEVEL_INFO,'Created Transport Package and Namespace.');
-
-
-/* modify system settings */
-/* set site_name */
-/*
-$setting = $modx->getObject('modSystemSetting',array('key' => 'site_name'));
-$setting->set('value', 'GAB85'); */ /* value should be tweakable with custom setup */
-/*
-$setting->save();
-*/
 
 
 /* create context here */
@@ -308,7 +298,7 @@ if (!is_array($settings)) {
     $attributes= array(
         xPDOTransport::UNIQUE_KEY => 'key',
         xPDOTransport::PRESERVE_KEYS => true,
-        xPDOTransport::UPDATE_OBJECT => false,
+        xPDOTransport::UPDATE_OBJECT => true,
     );
     foreach ($settings as $setting) {
         $vehicle = $builder->createVehicle($setting,$attributes);
