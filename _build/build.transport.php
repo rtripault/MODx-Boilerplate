@@ -28,7 +28,6 @@
 
 /*
 @TODO
-modify resource id 1 » use tpl 3
 creer les tvs (meta tags, color scheme…)
 nettoyer le build script
 refaire le package des subpackages + snippets
@@ -44,7 +43,7 @@ set_time_limit(0);
 /* define package */
 define('PKG_NAME','MODxBoilerplate');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-define('PKG_VERSION','0.2.2');
+define('PKG_VERSION','0.2.9');
 define('PKG_RELEASE','alpha1');
 
 /* define sources */
@@ -55,9 +54,7 @@ $sources = array(
     'data' => $root . '_build/data/',
     'resolvers' => $root . '_build/resolvers/',
     'subpackages' => $root . '_build/subpackages/',
-    /*
     'validators' => $root . '_build/validators/',
-        */
     'chunks' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/chunks/',
     /*
     'snippets' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/snippets/',
@@ -67,9 +64,7 @@ $sources = array(
     /*
     'pages' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/pages/',
     */
-    /*
     'source_assets' => $root.'assets/components/'.PKG_NAME_LOWER,
-        */
     'source_root' => $root . '_build/root/.htaccess',
     'source_as' => $root.'_build/assets/',
     'source_core' => $root.'core/components/'.PKG_NAME_LOWER,
@@ -194,12 +189,6 @@ if (is_array($tvs)) {
 $modx->log(modX::LOG_LEVEL_INFO,'Added in '.count($tvs).' tvs.'); flush();
 unset($tvs);
 
-/* add subpackages */
-$success = include $sources['data'].'transport.subpackages.php';
-if (!$success) { $modx->log(modX::LOG_LEVEL_FATAL,'Adding subpackages failed.'); }
-$modx->log(modX::LOG_LEVEL_INFO,'Added in '.count($subpackages).' subpackages.'); flush();
-unset($success);
-
 
 
 /*************************/
@@ -270,21 +259,21 @@ $vehicle->resolve('file',array(
     'source' => $sources['source_root'],
     'target' => "return MODX_BASE_PATH;",
 ));
-$builder->putVehicle($vehicle);
+$builder->putVehicle($vehicle); flush();
 
 // adding MBP stuff
 $vehicle->resolve('file',array(
     'source' => $sources['source_as'],
     'target' => "return MODX_BASE_PATH;",
 ));
-$builder->putVehicle($vehicle);
+$builder->putVehicle($vehicle); flush();
 
 // adding core/components
 $vehicle->resolve('file',array(
     'source' => $sources['source_core'],
     'target' => "return MODX_CORE_PATH . 'components/';",
 ));
-$builder->putVehicle($vehicle);
+$builder->putVehicle($vehicle); flush();
 
 /* load new system settings */
 $modx->log(modX::LOG_LEVEL_INFO,'Packaging in System Settings...');
@@ -345,9 +334,14 @@ if (empty($menu)) {
 unset($vehicle,$menu);
 
 /* Lexicon */
-/*
 $builder->buildLexicon($sources['lexicon']);
-*/
+
+
+/* add subpackages */
+$success = include $sources['data'].'transport.subpackages.php';
+if (!$success) { $modx->log(modX::LOG_LEVEL_FATAL,'Adding subpackages failed.'); }
+$modx->log(modX::LOG_LEVEL_INFO,'Added in '.count($subpackages).' subpackages.'); flush();
+unset($success);
 
 /* now pack in the license file, readme and setup options */
 $builder->setPackageAttributes(array(

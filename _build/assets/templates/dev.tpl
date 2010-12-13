@@ -17,9 +17,7 @@
 <!-- /content -->
 
 [[inc?file=`[[++assets_path]]chunks/inc.js.tpl`]]
-<!--[[!++mbp.dev:is=`1`:then=`[[inc?file=`[[++assets_path]]debug/debug.tpl`]]`:else=``]]-->
-[[inc?file=`[[++assets_path]]debug/debug.tpl`]]
+[[!++mbp.dev:is=`1`:then=`[[inc?file=`[[++assets_path]]debug/debug.tpl`]]`:else=``]]
 </body>
 </html>
-<!--[[!++mbp.dev:is=`1`:then=`[[inc?file=`[[++assets_path]]chunks/inc.perf.tpl`]]`]]-->
-[[inc?file=`[[++assets_path]]chunks/inc.perf.tpl`]]
+[[!++mbp.dev:is=`1`:then=`[[inc?file=`[[++assets_path]]chunks/inc.perf.tpl`]]`]]

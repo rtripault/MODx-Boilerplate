@@ -13,7 +13,7 @@
 
     <meta name="description" content="[[*description:notags]]" />
     <meta name="author" content="[[*publishedby:userinfo=`fullname`]]" />
-    <meta name="keywords" content="[[*metaTags]]" />
+    <meta name="keywords" content="[[*tags]]" />
     <base href="[[++site_url]]" />
     [[Canonical]]
 
@@ -21,11 +21,10 @@
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 
-  <!-- CSS : implied media="all" // define your master CSS resource ID in config; TODO: a way to increment ?v=? -->
     <link rel="stylesheet" href="[[~[[++mbp.css]]]]?v=1" />
 [[*customCSS:notempty=`[[*customCSS]]`]]
-[[++mbp.cssHandled:notempty=`<!-- handled.css comes here -->`]]
-[[++mbp.cssPrint:notempty=`<!-- print.css comes here -->`]]
+[[++mbp.css_handled:notempty=`<!-- handled.css comes here -->`]]
+[[++mbp.css_print:notempty=`<!-- print.css comes here -->`]]
     <script src="assets/js/libs/modernizr-1.6.min.js"></script>
     <link rel="alternate" type="application/rss+xml" title="[[++site_name]] RSS Feed" href="[[++site_url]][[~[[++mbp.rss]]]]" />
 [[*customRSS:notempty=`[[*customRSS]]`]]

@@ -1,30 +1,30 @@
   <!-- Grab Google CDN's jQuery. fall back to local if necessary -->
   <!-- allowing to choose library/version ? -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-    <script>!window.jQuery && document.write(unescape('%3Cscript src="assets/js/mylibs/jquery-1.4.4.min.js"%3E%3C/script%3E'))</script>
+    <script>!window.jQuery && document.write(unescape('%3Cscript src="/assets/js/mylibs/jquery-1.4.4.min.js"%3E%3C/script%3E'))</script>
 
   <!-- scripts concatenated and minified via ant build script-->
-    <script src="assets/js/plugins.js?v=1"></script>
-    <script src="assets/js/script.js?v=1"></script>
+    <script src="/assets/js/plugins.js?v=1"></script>
+    <script src="/assets/js/script.js?v=1"></script>
   <!-- end concatenated and minified scripts-->
 
 [[*customJS:notempty=`[[*customJS]]`]]
 
   <!--[if lt IE 9]>
-    <script src="assets/js/mylibs/selectivizr.js"></script>
+    <script src="/assets/js/mylibs/selectivizr.js"></script>
   <![endif]-->
 
   <!--[if lt IE 7 ]>
-    <script src="assets/js/libs/dd_belatedpng.js?v=1"></script>
+    <script src="/assets/js/libs/dd_belatedpng.js?v=1"></script>
     <script> DD_belatedPNG.fix('img, .png_bg'); //fix any <img> or .png_bg background-images </script>
   <![endif]-->
 
 <!--
-    <script src="assets/js/profiling/yahoo-profiling.min.js"></script>
-    <script src="assets/js/profiling/config.js"></script>
+    <script src="/assets/js/profiling/yahoo-profiling.min.js"></script>
+    <script src="/assets/js/profiling/config.js"></script>
 
     <script>
-        var _gaq = [['_setAccount', '[[++gaUA]]'], ['_trackPageview']];
+        var _gaq = [['_setAccount', '[[++mbp.google_analytics_ua]]'], ['_trackPageview']];
         (function(d, t) {
             var g = d.createElement(t),
                 s = d.getElementsByTagName(t)[0];
@@ -45,15 +45,15 @@
     </script>
 
     <script>
-        var pkBaseURL='[[++mbp.piwikURL]]';
+        var pkBaseURL='[[++mbp.piwik_url]]';
         document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js'%3E%3C/script%3E"));
     </script>
     <script>
         try {
-            var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", [[++mbp.piwikID]]);
+            var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", [[++mbp.piwik_id]]);
             piwikTracker.trackPageView();
             piwikTracker.enableLinkTracking();
         } catch( err ) {}
     </script>
-    <noscript><p><img src="[[++mbp.piwikURL]]piwik.php?idsite=[[++mbp.piwikID]]" style="border:0" alt="" /></p></noscript>
+    <noscript><p><img src="[[++mbp.piwik_url]]piwik.php?idsite=[[++mbp.piwik_id]]" style="border:0" alt="" /></p></noscript>
 -->

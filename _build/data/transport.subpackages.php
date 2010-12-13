@@ -14,11 +14,9 @@ foreach ($subpackages as $name => $signature) {
         'source' => $sources['subpackages'] . $signature.'.transport.zip',
         'target' => "return MODX_CORE_PATH . 'packages/';",
     ),$spAttr);
-    /*
     $vehicle->validate('php',array(
         'source' => $sources['validators'].'validate.'.$name.'.php'
     ));
-    */
     $builder->putVehicle($vehicle);
 }
 
