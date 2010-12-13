@@ -68,7 +68,7 @@ $snippets[5]= $modx->newObject('modSnippet');
 $snippets[5]->fromArray(array(
     'id' => 5,
     'name' => 'aside',
-    'description' => "Generates a list of resources to be used in <aside> (create a TV with input option: @EVAL return $modx->runSnippet('aside');)",
+    'description' => "Generates a list of resources to be used in <aside> (create a TV with input option: EVAL return modx->runSnippet('aside');)",
     'snippet' => getSnippetContent($sources['data'].'snippets/snippet.aside.php'),
 ),'',true,true);
 
