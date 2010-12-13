@@ -32,6 +32,29 @@
 $resources = array();
 $pages = $sources['data'].'resources/';
 
+$resources[1] = $modx->newObject('modResource');
+$resources[1]->fromArray(array(
+    'id' => 1,
+    'parent' => 0,
+    'template' => 3,
+    'pagetitle' => 'home',
+    'longtitle' => '',
+    'description' => 'homepage',
+    'introtext' => '',
+    'alias' => '',
+    'link_attributes' => '',
+    'content' => 'install successfull : now let\'s build some website',
+    'isfolder' => false,
+    'published' => true,
+    'hidemenu' => false,
+    'searchable' => true,
+    'cacheable' => true,
+    'richtext' => true,
+    'context_key' => 'web',
+    'menuindex' => 0,
+    'menutitle' => '',
+),'',true,true);
+
 $resources[11] = $modx->newObject('modResource');
 $resources[11]->fromArray(array(
     'id' => 11,

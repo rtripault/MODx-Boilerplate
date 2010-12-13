@@ -26,6 +26,15 @@
  * @subpackage build
  */
 
+/*
+@TODO
+modify resource id 1 » use tpl 3
+creer les tvs (meta tags, color scheme…)
+nettoyer le build script
+refaire le package des subpackages + snippets
+proprietes des snippets
+    */
+
 $mtime = microtime();
 $mtime = explode(' ', $mtime);
 $mtime = $mtime[1] + $mtime[0];
@@ -35,7 +44,7 @@ set_time_limit(0);
 /* define package */
 define('PKG_NAME','MODxBoilerplate');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-define('PKG_VERSION','0.2.0');
+define('PKG_VERSION','0.2.2');
 define('PKG_RELEASE','alpha1');
 
 /* define sources */
@@ -46,7 +55,9 @@ $sources = array(
     'data' => $root . '_build/data/',
     'resolvers' => $root . '_build/resolvers/',
     'subpackages' => $root . '_build/subpackages/',
+    /*
     'validators' => $root . '_build/validators/',
+        */
     'chunks' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/chunks/',
     /*
     'snippets' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/snippets/',
