@@ -1,11 +1,17 @@
 --------------------
-modExtra
+MODx Boilerplate
 --------------------
-Version: 1.0.0
-Author: John Doe <john@doe.com>
+Version: 0.3.7
+Author: Romain Tripault // Melting Media <romain@melting-media.com>
 --------------------
 
-A basic Extra for MODx Revolution.
+A basic front-end "framework" for MODx Revolution.
+Based on :
+- HTML5 Boilerplate
+- a lot of Shaun McCormick stuff
+    (well, MODx Core Developers & community to be true)
+
+Includes extras & snippets from MODx core devs & community
 
 Feel free to suggest ideas/improvements/bugs on GitHub:
-http://github.com/username/modExtra/issues
+https://github.com/MeltingMedia/MODx-Boilerplate

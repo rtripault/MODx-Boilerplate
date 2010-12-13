@@ -1,5 +1,5 @@
-Changelog for modExtra.
+Changelog for MODxBoilerplate.
 
-modExtra 1.0.0
+modxboilerplate 0.3.7
 ==============
-- Initial release.
+- Still in alpha, but cleaning the stuff.

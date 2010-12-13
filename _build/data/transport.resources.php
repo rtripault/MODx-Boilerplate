@@ -1,36 +1,20 @@
 <?php
 /**
- * MODx Sample Site
+ * MODx Boilerplate
  *
- * Copyright 2010 by Shaun McCormick <shaun@collabpad.com>, excepting
- * subpackages installed by the component.
+ * Copyright 2010 by Romain Tripault // Melting Media <romain@melting-media.com>
  *
- * This file is part of MODx Sample Site, a packaged sample site for MODx
- * Revolution.
- *
- * MODx Sample Site is free software; you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by the Free
- * Software Foundation; either version 2 of the License, or (at your option) any
- * later version.
- *
- * MODx Sample Site is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
- * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * MODx Sample Site; if not, write to the Free Software Foundation, Inc., 59
- * Temple Place, Suite 330, Boston, MA 02111-1307 USA
- *
- * @package modxss
+ * @package modxboilerplate
  */
 /**
- * Transport Resource
- * @package modxss
+ * Creates default resources
+ *
+ * @package modxboilerplate 
  * @subpackage build
  */
+
 $resources = array();
-$pages = $sources['data'].'resources/';
+$src = $sources['data'].'resources/s/';
 
 $resources[1] = $modx->newObject('modResource');
 $resources[1]->fromArray(array(
@@ -43,7 +27,7 @@ $resources[1]->fromArray(array(
     'introtext' => '',
     'alias' => '',
     'link_attributes' => '',
-    'content' => 'install successfull : now let\'s build some website',
+    'content' => "<p>MODx Boilerplate successfully installed : now let's build some prototype!</p>",
     'isfolder' => false,
     'published' => true,
     'hidemenu' => false,
@@ -66,7 +50,7 @@ $resources[11]->fromArray(array(
     'introtext' => '',
     'alias' => 's',
     'link_attributes' => '',
-    'content' => file_get_contents($pages.'s/empty.tpl'),
+    'content' => file_get_contents($src.'empty.tpl'),
     'isfolder' => true,
     'published' => true,
     'hidemenu' => true,
@@ -89,7 +73,7 @@ $resources[2]->fromArray(array(
     'introtext' => '',
     'alias' => '403',
     'link_attributes' => '',
-    'content' => file_get_contents($pages.'s/403.tpl'),
+    'content' => file_get_contents($src.'403.tpl'),
     'isfolder' => false,
     'published' => true,
     'hidemenu' => true,
@@ -112,7 +96,7 @@ $resources[3]->fromArray(array(
     'introtext' => '',
     'alias' => '404',
     'link_attributes' => '',
-    'content' => file_get_contents($pages.'s/404.tpl'),
+    'content' => file_get_contents($src.'404.tpl'),
     'isfolder' => false,
     'published' => true,
     'hidemenu' => true,
@@ -135,7 +119,7 @@ $resources[4]->fromArray(array(
     'introtext' => '',
     'alias' => 'legal',
     'link_attributes' => '',
-    'content' => file_get_contents($pages.'s/legal.tpl'),
+    'content' => file_get_contents($src.'legal.tpl'),
     'isfolder' => false,
     'published' => true,
     'hidemenu' => false,
@@ -151,14 +135,14 @@ $resources[5] = $modx->newObject('modResource');
 $resources[5]->fromArray(array(
     'id' => 5,
     'parent' => 11,
-    'template' => 0,
+    'template' => 4,
     'pagetitle' => 'master.css',
     'longtitle' => '',
     'description' => '',
     'introtext' => '',
     'alias' => 'master',
     'link_attributes' => '',
-    'content' => file_get_contents($pages.'s/master.css.tpl'),
+    'content' => file_get_contents($src.'master.css.tpl'),
     'isfolder' => false,
     'published' => true,
     'hidemenu' => true,
@@ -183,7 +167,7 @@ $resources[6]->fromArray(array(
     'introtext' => '',
     'alias' => 'offline',
     'link_attributes' => '',
-    'content' => file_get_contents($pages.'s/offline.tpl'),
+    'content' => file_get_contents($src.'offline.tpl'),
     /*'publishedon' => time(),*/
     'isfolder' => false,
     'published' => true,
@@ -207,7 +191,7 @@ $resources[7]->fromArray(array(
     'introtext' => '',
     'alias' => 'openning',
     'link_attributes' => '',
-    'content' => file_get_contents($pages.'s/openning.tpl'),
+    'content' => file_get_contents($src.'openning.tpl'),
     /*'publishedon' => time(),*/
     'isfolder' => false,
     'published' => true,
@@ -231,7 +215,7 @@ $resources[8]->fromArray(array(
     'introtext' => '',
     'alias' => 'rss',
     'link_attributes' => '',
-    'content' => file_get_contents($pages.'s/rss.tpl'),
+    'content' => file_get_contents($src.'rss.tpl'),
     'isfolder' => false,
     'published' => true,
     'hidemenu' => true,
@@ -256,7 +240,7 @@ $resources[9]->fromArray(array(
     'introtext' => '',
     'alias' => 'sitemap',
     'link_attributes' => '',
-    'content' => file_get_contents($pages.'s/sitemap.html.tpl'),
+    'content' => file_get_contents($src.'sitemap.html.tpl'),
     'isfolder' => false,
     'published' => true,
     'hidemenu' => false,
@@ -279,7 +263,7 @@ $resources[10]->fromArray(array(
     'introtext' => '',
     'alias' => 'sitemap',
     'link_attributes' => '',
-    'content' => file_get_contents($pages.'s/sitemap.tpl'),
+    'content' => file_get_contents($src.'sitemap.tpl'),
     'isfolder' => false,
     'published' => true,
     'hidemenu' => true,

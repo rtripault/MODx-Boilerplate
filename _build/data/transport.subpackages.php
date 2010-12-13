@@ -1,12 +1,22 @@
 <?php
 /**
- * Package in subpackages
+ * MODx Boilerplate
  *
- * @package modxss
+ * Copyright 2010 by Romain Tripault // Melting Media <romain@melting-media.com>
+ *
+ * @package modxboilerplate
  */
+/**
+ * Adds in some usefull extras
+ *
+ * @package modxboilerplate 
+ * @subpackage build
+ */
+
 $subpackages = array(
-    'mbp'      => 'mbp-1.0.0-beta1',
+    'mbp'      => 'mbpsp-1.0.0-beta1',
 );
+
 $spAttr = array('vehicle_class' => 'xPDOTransportVehicle');
 
 foreach ($subpackages as $name => $signature) {

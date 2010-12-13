@@ -4,19 +4,6 @@
  *
  * Copyright 2010 by Romain Tripault // Melting Media <romain@melting-media.com>
  *
- * MODx Boilerplate is free software; you can redistribute it and/or modify it under the
- * terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later
- * version.
- *
- * MODx Boilerplate is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along with
- * MODx Boilerplate; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
- *
  * @package modxboilerplate
  */
 /**
@@ -28,12 +15,11 @@
 
 /*
 @TODO
-creer les tvs (meta tags, color scheme…) + verifier erreurs
-lier TVs aux templates
-template (dummy) CSS
+verifier erreurs creation/mise à jour TVs
 nettoyer le build script
 refaire le package des subpackages + snippets
 proprietes des snippets
+vérifier erreur "file"…
     */
 
 $mtime = microtime();
@@ -45,8 +31,8 @@ set_time_limit(0);
 /* define package */
 define('PKG_NAME','MODxBoilerplate');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-define('PKG_VERSION','0.3.1');
-define('PKG_RELEASE','alpha1');
+define('PKG_VERSION','0.3.7');
+define('PKG_RELEASE','alpha');
 
 /* define sources */
 $root = dirname(dirname(__FILE__)).'/';
@@ -55,21 +41,15 @@ $sources = array(
     'build' => $root . '_build/',
     'data' => $root . '_build/data/',
     'resolvers' => $root . '_build/resolvers/',
-    'subpackages' => $root . '_build/subpackages/',
+    'subpackages' => $root . '_build/data/subpackages/',
     'validators' => $root . '_build/validators/',
-    'chunks' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/chunks/',
-    /*
-    'snippets' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/snippets/',
-    */
     'lexicon' => $root . 'core/components/'.PKG_NAME_LOWER.'/lexicon/',
     'docs' => $root.'core/components/'.PKG_NAME_LOWER.'/docs/',
-    /*
-    'pages' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/pages/',
-    */
     'source_assets' => $root.'assets/components/'.PKG_NAME_LOWER,
-    'source_root' => $root . '_build/root/.htaccess',
-    'source_as' => $root.'_build/assets/',
     'source_core' => $root.'core/components/'.PKG_NAME_LOWER,
+    // custom resources
+    'source_root' => $root . '_build/data/root/.htaccess',
+    'source_as' => $root.'_build/assets/',
 );
 unset($root);
 
@@ -150,7 +130,7 @@ unset($propertySets,$propertySet,$attributes);
 /* load user groups */
 $usergroups = include_once $sources['data'].'transport.usergroups.php';
 if (!is_array($usergroups)) $modx->log(modX::LOG_LEVEL_FATAL,'No User Groups returned.');
-$attributes= array(
+$attributes = array(
     xPDOTransport::UNIQUE_KEY => 'name',
     xPDOTransport::PRESERVE_KEYS => false,
     xPDOTransport::UPDATE_OBJECT => true,
@@ -326,11 +306,9 @@ if (empty($menu)) {
     $vehicle->resolve('php',array(
         'source' => $sources['resolvers'] . 'resolve.tables.php',
     ));
-    */
     $vehicle->resolve('php',array(
         'source' => $sources['resolvers'] . 'resolve.paths.php',
     ));
-    /*
     $vehicle->resolve('php',array(
         'source' => $sources['resolvers'] . 'resolve.subpackage.php',
     ));
@@ -340,15 +318,14 @@ if (empty($menu)) {
 }
 unset($vehicle,$menu);
 
-/* Lexicon */
-$builder->buildLexicon($sources['lexicon']);
-
-
 /* add subpackages */
 $success = include $sources['data'].'transport.subpackages.php';
 if (!$success) { $modx->log(modX::LOG_LEVEL_FATAL,'Adding subpackages failed.'); }
 $modx->log(modX::LOG_LEVEL_INFO,'Added in '.count($subpackages).' subpackages.'); flush();
 unset($success);
+
+/* Lexicon */
+$builder->buildLexicon($sources['lexicon']);
 
 /* now pack in the license file, readme and setup options */
 $builder->setPackageAttributes(array(
@@ -368,12 +345,12 @@ $modx->log(modX::LOG_LEVEL_INFO,'Added package attributes and setup options.');
 $modx->log(modX::LOG_LEVEL_INFO,'Packing up transport package zip...');
 $builder->pack();
 
-$mtime= microtime();
-$mtime= explode(" ", $mtime);
-$mtime= $mtime[1] + $mtime[0];
-$tend= $mtime;
-$totalTime= ($tend - $tstart);
-$totalTime= sprintf("%2.4f s", $totalTime);
+$mtime = microtime();
+$mtime = explode(" ", $mtime);
+$mtim e= $mtime[1] + $mtime[0];
+$tend = $mtime;
+$totalTime = ($tend - $tstart);
+$totalTime = sprintf("%2.4f s", $totalTime);
 
 $modx->log(modX::LOG_LEVEL_INFO,"\n<br />Package Built.<br />\nExecution time: {$totalTime}\n");
 

@@ -4,25 +4,12 @@
  *
  * Copyright 2010 by Romain Tripault // Melting Media <romain@melting-media.com>
  *
- * MODx Boilerplate is free software; you can redistribute it and/or modify it under the
- * terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later
- * version.
- *
- * MODx Boilerplate is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along with
- * MODx Boilerplate; if not, write to the Free Software Foundation, Inc., 59 Temple
- * Place, Suite 330, Boston, MA 02111-1307 USA
- *
  * @package modxboilerplate
  */
 /**
- * Loads system settings into build
+ * Updates system settings & creates some new ones for MODx Boilerplate
  *
- * @package modxboilerplate
+ * @package modxboilerplate 
  * @subpackage build
  */
 
@@ -32,7 +19,7 @@ $settings = array();
 $settings['site_name']= $modx->newObject('modSystemSetting');
 $settings['site_name']->fromArray(array (
     'key' => 'site_name',
-    'value' => 'GAB 85', // @TODO managable via setup options
+    'value' => 'MODx Boilerplate', // @TODO managable via setup options
     'xtype' => 'textfield',
     'namespace' => 'core',
     'area' => 'site',
@@ -112,13 +99,11 @@ $settings['unauthorized_page']->fromArray(array (
 ), '', true, true);
 
 
-
-
 // create system settings for modxboilerplate @TODO make things managable via setup options
 $settings['mbp.tagline']= $modx->newObject('modSystemSetting');
 $settings['mbp.tagline']->fromArray(array(
     'key' => 'mbp.tagline',
-    'value' => '',
+    'value' => 'Fastly deploy prototypes with MODx Revolution',
     'xtype' => 'textfield',
     'namespace' => 'modxboilerplate',
     'area' => 'General',
