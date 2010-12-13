@@ -13,15 +13,6 @@
  * @subpackage build
  */
 
-/*
-@TODO
-verifier erreurs creation/mise à jour TVs
-nettoyer le build script
-refaire le package des subpackages + snippets
-proprietes des snippets
-vérifier erreur "file"…
-    */
-
 $mtime = microtime();
 $mtime = explode(' ', $mtime);
 $mtime = $mtime[1] + $mtime[0];
@@ -31,7 +22,7 @@ set_time_limit(0);
 /* define package */
 define('PKG_NAME','MODxBoilerplate');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-define('PKG_VERSION','0.3.7');
+define('PKG_VERSION','0.3.8');
 define('PKG_RELEASE','alpha');
 
 /* define sources */
@@ -72,9 +63,8 @@ $builder->registerNamespace(PKG_NAME_LOWER,false,true,'{core_path}components/'.P
 $modx->log(modX::LOG_LEVEL_INFO,'Created Transport Package and Namespace.');
 
 
-/*************************************/
-/* @TODO create contexts for multilingual */
 /*
+// @TODO create contexts for multilingual
 $contexts = include_once $sources['data'].'transport.contexts.php';
 if (!is_array($contexts)) $modx->log(modX::LOG_LEVEL_FATAL,'No Context returned.');
 $attributes = array(
@@ -88,13 +78,44 @@ foreach ($contexts as $context) {
 }
 $modx->log(modX::LOG_LEVEL_INFO,'Added in '.count($contexts).' contexts.'); flush();
 unset($contexts,$context,$attributes);
+
+// @TODO create & define (if possible) required system settings (base_url, site_name, http_host…) for contexts
+    $access= $this->xpdo->newObject('modAccessContext');
+    $access->fromArray(array(
+      'target' => 'mgr',
+      'principal_class' => 'modUserGroup',
+      'principal' => $adminGroup->get('id'),
+      'authority' => 0,
+      'policy' => $adminPolicy->get('id'),
+    ));
+    $access->save();
+    unset($access);
+
+$context = $modx->newObject('modContext');
+$context->set('key','fr');
+$context->save();
+
 */
 
-/* @TODO create & define (if possible) required system settings (base_url, site_name, http_host…) for contexts */
+/* load system settings */
+$modx->log(modX::LOG_LEVEL_INFO,'Packaging in System Settings...');
+$settings = include $sources['data'].'transport.settings.php';
 
-
-
-/**************/
+if (!is_array($settings)) {
+    $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in settings.');
+} else {
+    $attributes= array(
+        xPDOTransport::UNIQUE_KEY => 'key',
+        xPDOTransport::PRESERVE_KEYS => true,
+        xPDOTransport::UPDATE_OBJECT => true,
+    );
+    foreach ($settings as $setting) {
+        $vehicle = $builder->createVehicle($setting,$attributes);
+        $builder->putVehicle($vehicle);
+    }
+    $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($settings).' System Settings.');
+}
+unset($settings,$setting,$attributes);
 
 /* modContentTypes */
 $contenttypes = include $sources['data'].'transport.content_types.php';
@@ -163,6 +184,14 @@ if (is_array($chunks)) {
 $modx->log(modX::LOG_LEVEL_INFO,'Added in '.count($chunks).' chunks.'); flush();
 unset($chunks);
 
+/* add snippets */
+$snippets = include $sources['data'].'transport.snippets.php';
+if (is_array($snippets)) {
+    $category->addMany($snippets,'Snippets');
+} else { $modx->log(modX::LOG_LEVEL_FATAL,'Adding snippets failed.'); }
+$modx->log(modX::LOG_LEVEL_INFO,'Added in '.count($snippets).' snippets.'); flush();
+unset($snippets);
+
 /* add tvs */
 $tvs = include $sources['data'].'transport.tvs.php';
 if (is_array($tvs)) {
@@ -171,7 +200,11 @@ if (is_array($tvs)) {
 $modx->log(modX::LOG_LEVEL_INFO,'Added in '.count($tvs).' tvs.'); flush();
 unset($tvs);
 
-
+/* add subpackages */
+$success = include $sources['data'].'transport.subpackages.php';
+if (!$success) { $modx->log(modX::LOG_LEVEL_FATAL,'Adding subpackages failed.'); }
+$modx->log(modX::LOG_LEVEL_INFO,'Added in '.count($subpackages).' subpackages.'); flush();
+unset($success);
 
 /*************************/
 /* load resources in db */
@@ -196,7 +229,6 @@ foreach ($resources as $resource) {
 }
 $modx->log(modX::LOG_LEVEL_INFO,'Added in '.count($resources).' Resources.'); flush();
 unset($resources,$resource,$attributes);
-
 
 /****************************/
 /* create category vehicle */
@@ -232,7 +264,6 @@ $attr = array(
     ),
 );
 $vehicle = $builder->createVehicle($category,$attr);
-
 $modx->log(modX::LOG_LEVEL_INFO,'Adding file resolvers to category...');
 
 /* Let's add static files */
@@ -241,46 +272,20 @@ $vehicle->resolve('file',array(
     'source' => $sources['source_root'],
     'target' => "return MODX_BASE_PATH;",
 ));
-$builder->putVehicle($vehicle); flush();
-
 // adding MBP stuff
 $vehicle->resolve('file',array(
     'source' => $sources['source_as'],
     'target' => "return MODX_BASE_PATH;",
 ));
-$builder->putVehicle($vehicle); flush();
-
 // adding core/components
 $vehicle->resolve('file',array(
     'source' => $sources['source_core'],
     'target' => "return MODX_CORE_PATH . 'components/';",
 ));
-$builder->putVehicle($vehicle); flush();
-
 $vehicle->resolve('php',array(
     'source' => $sources['resolvers'] . 'resolve.tv.template.php',
 ));
 $builder->putVehicle($vehicle); flush();
-
-/* load new system settings */
-$modx->log(modX::LOG_LEVEL_INFO,'Packaging in System Settings...');
-$settings = include $sources['data'].'transport.settings.php';
-
-if (!is_array($settings)) {
-    $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in settings.');
-} else {
-    $attributes= array(
-        xPDOTransport::UNIQUE_KEY => 'key',
-        xPDOTransport::PRESERVE_KEYS => true,
-        xPDOTransport::UPDATE_OBJECT => true,
-    );
-    foreach ($settings as $setting) {
-        $vehicle = $builder->createVehicle($setting,$attributes);
-        $builder->putVehicle($vehicle);
-    }
-    $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($settings).' System Settings.');
-}
-unset($settings,$setting,$attributes);
 
 
 /* load menu */
@@ -317,12 +322,6 @@ if (empty($menu)) {
     $modx->log(modX::LOG_LEVEL_INFO,'Packaged in '.count($menu).' menus.');
 }
 unset($vehicle,$menu);
-
-/* add subpackages */
-$success = include $sources['data'].'transport.subpackages.php';
-if (!$success) { $modx->log(modX::LOG_LEVEL_FATAL,'Adding subpackages failed.'); }
-$modx->log(modX::LOG_LEVEL_INFO,'Added in '.count($subpackages).' subpackages.'); flush();
-unset($success);
 
 /* Lexicon */
 $builder->buildLexicon($sources['lexicon']);
