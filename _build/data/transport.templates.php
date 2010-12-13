@@ -46,4 +46,12 @@ $templates[1]->fromArray(array(
     'content' => file_get_contents($sources['data'].'templates/template.tpl'),
 ),'',true,true);
 
+$templates[2]= $modx->newObject('modTemplate');
+$templates[2]->fromArray(array(
+    'id' => 4,
+    'templatename' => 'Master.css',
+    'description' => 'Dummy tpl for CSS',
+    'content' => '',
+),'',true,true);
+
 return $templates;

@@ -28,7 +28,9 @@
 
 /*
 @TODO
-creer les tvs (meta tags, color scheme…)
+creer les tvs (meta tags, color scheme…) + verifier erreurs
+lier TVs aux templates
+template (dummy) CSS
 nettoyer le build script
 refaire le package des subpackages + snippets
 proprietes des snippets
@@ -43,7 +45,7 @@ set_time_limit(0);
 /* define package */
 define('PKG_NAME','MODxBoilerplate');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-define('PKG_VERSION','0.2.9');
+define('PKG_VERSION','0.3.1');
 define('PKG_RELEASE','alpha1');
 
 /* define sources */
@@ -272,6 +274,11 @@ $builder->putVehicle($vehicle); flush();
 $vehicle->resolve('file',array(
     'source' => $sources['source_core'],
     'target' => "return MODX_CORE_PATH . 'components/';",
+));
+$builder->putVehicle($vehicle); flush();
+
+$vehicle->resolve('php',array(
+    'source' => $sources['resolvers'] . 'resolve.tv.template.php',
 ));
 $builder->putVehicle($vehicle); flush();
 
