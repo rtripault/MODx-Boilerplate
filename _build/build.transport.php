@@ -347,7 +347,7 @@ $builder->pack();
 
 $mtime = microtime();
 $mtime = explode(" ", $mtime);
-$mtim e= $mtime[1] + $mtime[0];
+$mtime = $mtime[1] + $mtime[0];
 $tend = $mtime;
 $totalTime = ($tend - $tstart);
 $totalTime = sprintf("%2.4f s", $totalTime);
