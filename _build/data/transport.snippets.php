@@ -28,7 +28,7 @@ unset($properties);
 
 $snippets[1]= $modx->newObject('modSnippet');
 $snippets[1]->fromArray(array(
-    'id' => 1,
+    'id' => 0,
     'name' => 'getChildCount',
     'description' => 'Counts children of a given parent',
     'snippet' => getSnippetContent($sources['data'].'snippets/snippet.getChildCount.php'),
@@ -39,7 +39,7 @@ unset($properties);
 
 $snippets[2]= $modx->newObject('modSnippet');
 $snippets[2]->fromArray(array(
-    'id' => 2,
+    'id' => 0,
     'name' => 'inc',
     'description' => 'Includes files from filesystem',
     'snippet' => getSnippetContent($sources['data'].'snippets/snippet.inc.php'),
@@ -50,7 +50,7 @@ unset($properties);
 
 $snippets[3]= $modx->newObject('modSnippet');
 $snippets[3]->fromArray(array(
-    'id' => 3,
+    'id' => 0,
     'name' => 'now',
     'description' => 'Returns actual time in unix timestamp format',
     'snippet' => getSnippetContent($sources['data'].'snippets/snippet.now.php'),
@@ -58,7 +58,7 @@ $snippets[3]->fromArray(array(
 
 $snippets[4]= $modx->newObject('modSnippet');
 $snippets[4]->fromArray(array(
-    'id' => 4,
+    'id' => 0,
     'name' => 'getTime',
     'description' => 'For RSS Feeds',
     'snippet' => getSnippetContent($sources['data'].'snippets/snippet.getTime.php'),
@@ -66,7 +66,7 @@ $snippets[4]->fromArray(array(
 
 $snippets[5]= $modx->newObject('modSnippet');
 $snippets[5]->fromArray(array(
-    'id' => 5,
+    'id' => 0,
     'name' => 'aside',
     'description' => "Generates a list of resources to be used in <aside> (create a TV with input option: EVAL return modx->runSnippet('aside');)",
     'snippet' => getSnippetContent($sources['data'].'snippets/snippet.aside.php'),

@@ -23,7 +23,7 @@
 #grid {
     position: absolute;
     /*display: none;*/
-    background: url(/assets/debug-img/grid.png) repeat-y top center;
+    background: url(/assets/debug/grid.png) repeat-y top center;
     content: ".";
     top: 0;
     left: 0;
@@ -35,7 +35,7 @@
 #grid-14-21 {
     position: absolute;
     /*display: none;*/
-    background: url(/assets/debug-img/grid-14_21.png) repeat;
+    background: url(/assets/debug/grid-14_21.png) repeat;
     content: ".";
     top: 0;
     left: 0;
