@@ -1,14 +1,5 @@
 <?php
-/*
-    Author : Jason Coward
-    Link : http://www.jasoncoward.com/technology/2010/10/the-executioner-snippet.html
-    Usage :
-        [[!Executioner?
-            &tElement=`snippet / chunk name`
-            &tElementClass=`modChunk / modSnippet`
-            // other params for snippet/chunk
-        ]]
-*/
+
 $output = '';
 $tElementClass = !empty($tElementClass) ? $tElementClass : 'modSnippet';
 
