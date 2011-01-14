@@ -12,6 +12,7 @@
         </article>
 
 [[inc?file=`[[++assets_path]]chunks/inc.aside.tpl`]]
+
 [[inc?file=`[[++assets_path]]chunks/inc.footer.tpl`]]
     </div>
 <!-- /content -->

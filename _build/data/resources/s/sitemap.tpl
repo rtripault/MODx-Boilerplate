@@ -1,1 +1,1 @@
-[[!GooglesiteMap]]
+[[!GoogleSiteMap]]

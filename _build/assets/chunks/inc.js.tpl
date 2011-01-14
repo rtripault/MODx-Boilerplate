@@ -20,8 +20,8 @@
 [[!++mbp.profiling:is=`1`:then=`<script src="/assets/js/profiling/yahoo-profiling.min.js"></script>
 <script src="/assets/js/profiling/config.js"></script>`:else=``]]
 [[!++mbp.google_analytics:is=`1`:then=`
-<!--<script>
-    var _gaq = [['_setAccount', '[[!++mbp.google_analytics_ua]]'], ['_trackPageview']];
+<script>
+    var _gaq = [ ['_setAccount', '[[!++mbp.google_analytics_ua]]'], ['_trackPageview'] ];
     (function(d, t) {
         var g = d.createElement(t),
             s = d.getElementsByTagName(t)[0];
@@ -29,8 +29,8 @@
         g.src = '//www.google-analytics.com/ga.js';
         s.parentNode.insertBefore(g, s);
     })(document, 'script');
-</script>-->
-<script>
+</script>
+<!--<script>
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', '[[!++mbp.google_analytics_ua]]']);
   _gaq.push(['_trackPageview']);
@@ -39,7 +39,7 @@
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
-</script>`:else=``]]
+</script>-->`:else=``]]
 [[!++mbp.woopra:is=`1`:then=`<script>
     (function(){
         var wsc=document.createElement('script');

@@ -1,5 +1,5 @@
     <nav role="navigation">
         <ul>
-[[getResources@modxboilerplate?context=`[[*context_key]]`]]
+[[Wayfinder? &startId=`0`]]<!-- getCache -->
         </ul>
     </nav>

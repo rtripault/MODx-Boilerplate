@@ -1,3 +1,3 @@
     <footer id="footer">
-        <p>© 2010 [[++site_name]]</p>
+        <p>© 2011 [[++site_name]]</p>
     </footer>
